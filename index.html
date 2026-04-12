@@ -1223,6 +1223,7 @@ Rules:
 - Each scenario presents a real-world situation (not a textbook definition question)
 - 4 answer choices per scenario
 - Exactly one mechanistically correct answer
+- CRITICAL: Distribute correct answers randomly across positions A, B, C, and D. Do NOT place the correct answer in the same position repeatedly. Across 9 scenarios, spread correct answers across all four positions — some A, some B, some C, some D. Vary them deliberately.
 - Wrong answers are plausible but reveal a misreading of the interface
 - Feedback explains the mechanism at a systems level — not just what is correct but why
 - Each scenario tests a different core concept within the domain — vary widely across the 9 scenarios
@@ -1427,7 +1428,7 @@ async function showResults() {
   const readConcepts = sessionResults.filter(r => r.correct).map(r => r.concept).join(', ');
   const prevScores = history.slice(1, 4).map(h => `${h.score}/${h.total}`).join(', ');
 
-  const insightPrompt = `You are Gravificer — a precision signal architecture system generating a personalized insight report.
+  const insightPrompt = `You are Gravificer — a precision learning system generating a personalized insight report after a training session.
 
 Domain tested: ${d.label} (${d.description})
 Score: ${correct}/${total} at ${currentDifficulty} difficulty
@@ -1436,14 +1437,15 @@ Concepts missed: ${missedConcepts || 'none'}
 Previous session scores: ${prevScores || 'first session'}
 Current streak: ${streak} session${streak !== 1 ? 's' : ''}
 
-Write a 3–4 sentence insight summary in the Gravificer voice:
-- Analytical, not consoling or congratulatory
-- Identify the specific pattern in what was missed (if any)
-- If previous scores exist, note whether performance is improving, declining, or consistent
-- End with one sharp reframe or actionable signal
-- No headers, no bullet points — prose only
-- Gravificer standard: every sentence must clarify, reveal, or reframe. No filler.
-- Write in second person. Be precise and direct.`;
+Write a 3–4 sentence insight summary that:
+- Opens with genuine recognition of what they got right — name the specific concepts they read well
+- If they missed concepts, frame it as an opportunity: "this is where the next level of understanding lives" not as failure
+- Is warm, encouraging, and makes them want to come back for another session
+- Ends with one forward-looking signal or question that sparks curiosity about what they'll discover next time
+- Feels like a knowledgeable coach, not a judge
+- No headers, no bullet points — flowing prose only
+- Second person, conversational but precise
+- Never use the word "brutal" or make the person feel bad about what they missed`;
 
   try {
     const r2 = await fetch('https://gravificer-proxy.mvphillips.workers.dev/', {
