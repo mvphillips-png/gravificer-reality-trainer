@@ -1498,7 +1498,7 @@
 <nav>
   <a href="https://signals.quirkyflashchronicles.com/" class="nav-brand">GRAVIFICER</a>
   <div class="nav-right">
-    <a href="https://signals.quirkyflashchronicles.com/" class="nav-link">← Hub</a>
+    <a href="https://signals.quirkyflashchronicles.com/" class="nav-link" id="nav-hub-link">← Hub</a>
     <div class="nav-status">
       <div class="status-dot"></div>
       CLAUDE API · LIVE
@@ -1611,7 +1611,7 @@
           <div class="domain-sub" id="domain-sub"></div>
         </div>
       </div>
-      <button class="btn btn-dim" onclick="goHome()" style="margin-top:0.2rem;font-size:0.58rem">← Hub</button>
+      <button class="btn btn-dim" onclick="goHome()" style="margin-top:0.2rem;font-size:0.58rem">← Trainer</button>
     </div>
 
     <div class="tab-row">
@@ -1655,7 +1655,7 @@
 
       <div class="nav-row" id="nav-row" style="display:none">
         <button class="btn btn-cyan" onclick="nextScenario()" id="btn-next">Next Scenario ↗</button>
-        <button class="btn btn-dim" onclick="goHome()">← All Interfaces</button>
+        <button class="btn btn-dim" onclick="goHome()">← Trainer</button>
       </div>
     </div>
 
@@ -1663,7 +1663,7 @@
     <div id="tab-explorer" style="display:none">
       <div class="explorer-grid" id="explorer-grid"></div>
       <div class="nav-row">
-        <button class="btn btn-dim" onclick="goHome()">← All Interfaces</button>
+        <button class="btn btn-dim" onclick="goHome()">← Trainer</button>
       </div>
     </div>
   </div>
@@ -1675,7 +1675,7 @@
         <div class="instrument-tag">// Interface Report</div>
         <div class="domain-title" id="results-title"></div>
       </div>
-      <button class="btn btn-dim" onclick="goHome()" style="font-size:0.58rem">← Hub</button>
+      <button class="btn btn-dim" onclick="goHome()" style="font-size:0.58rem">← Trainer</button>
     </div>
 
     <div class="score-display">
@@ -1743,7 +1743,7 @@
         <div class="de-session-category" id="de-session-category"></div>
         <div class="de-session-title" id="de-session-title"></div>
       </div>
-      <button class="btn btn-dim" onclick="deGoHome()" style="font-size:0.62rem;flex-shrink:0">← Categories</button>
+      <button class="btn btn-dim" onclick="deGoHome()" style="font-size:0.62rem;flex-shrink:0">← Trainer</button>
     </div>
 
     <div class="de-step-row">
@@ -1779,7 +1779,7 @@
 
     <div class="de-nav" id="de-nav" style="display:none">
       <button class="btn btn-cyan" onclick="deNext()" id="de-btn-next">Next Decision ↗</button>
-      <button class="btn btn-dim" onclick="deGoHome()">← Categories</button>
+      <button class="btn btn-dim" onclick="deGoHome()">← Trainer</button>
     </div>
   </div>
 
@@ -1790,7 +1790,7 @@
         <div class="de-eyebrow">// Session Complete</div>
         <div class="de-session-title" id="de-debrief-title"></div>
       </div>
-      <button class="btn btn-dim" onclick="deGoHome()" style="font-size:0.62rem;flex-shrink:0">← Categories</button>
+      <button class="btn btn-dim" onclick="deGoHome()" style="font-size:0.62rem;flex-shrink:0">← Trainer</button>
     </div>
 
     <div class="de-debrief-score">
@@ -1951,6 +1951,16 @@ function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  const navLink = document.getElementById('nav-hub-link');
+  if (id === 'screen-home') {
+    navLink.href = 'https://signals.quirkyflashchronicles.com/';
+    navLink.textContent = '← Hub';
+    navLink.onclick = null;
+  } else {
+    navLink.href = '#';
+    navLink.textContent = '← Trainer';
+    navLink.onclick = (e) => { e.preventDefault(); goHome(); };
+  }
 }
 
 function goHome() {
@@ -2446,6 +2456,16 @@ function deShow(id) {
   document.querySelectorAll('.de-screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const navLink = document.getElementById('nav-hub-link');
+  if (id === 'de-home') {
+    navLink.href = 'https://signals.quirkyflashchronicles.com/';
+    navLink.textContent = '← Hub';
+    navLink.onclick = null;
+  } else {
+    navLink.href = '#';
+    navLink.textContent = '← Trainer';
+    navLink.onclick = (e) => { e.preventDefault(); deGoHome(); };
+  }
 }
 
 function deGoHome() {
