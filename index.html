@@ -869,6 +869,536 @@
     font-weight: 600;
   }
 
+  /* ══ DECISION ENGINE ══ */
+  #decision-engine {
+    position: relative;
+    z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 1.5rem 4rem;
+  }
+
+  .de-screen { display: none; }
+  .de-screen.active { display: block; animation: fadeIn 0.4s ease both; }
+
+  .de-header-wrap {
+    border-top: 1px solid var(--border-dim);
+    padding-top: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .de-eyebrow {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--amber);
+    opacity: 0.6;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .de-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .de-intro {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.75;
+    max-width: 600px;
+    margin-bottom: 2rem;
+  }
+
+  /* PROFILE BAR */
+  .de-profile-bar {
+    background: var(--bg2);
+    border: 1px solid rgba(255,230,0,0.15);
+    border-radius: var(--radius);
+    padding: 1rem 1.3rem;
+    margin-bottom: 2rem;
+  }
+
+  .de-profile-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--amber);
+    opacity: 0.55;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.6rem;
+  }
+
+  .de-profile-stats {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .de-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .de-stat-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    color: var(--amber);
+  }
+
+  .de-stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+  }
+
+  /* CATEGORIES */
+  .de-categories {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .de-category-group {
+    background: var(--bg2);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .de-category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.3rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    gap: 1rem;
+  }
+
+  .de-category-header:hover { background: var(--bg3); }
+
+  .de-category-left { display: flex; align-items: center; gap: 0.9rem; }
+
+  .de-category-icon {
+    font-size: 1.1rem;
+    width: 28px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .de-category-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.06em;
+  }
+
+  .de-category-tagline {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 0.15rem;
+    line-height: 1.4;
+  }
+
+  .de-category-toggle {
+    font-size: 0.8rem;
+    color: var(--text-faint);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .de-category-group.open .de-category-toggle { transform: rotate(180deg); }
+
+  .de-subcategories {
+    display: none;
+    padding: 0 1rem 0.75rem;
+    gap: 0.5rem;
+    flex-direction: column;
+    border-top: 1px solid var(--border-dim);
+  }
+
+  .de-category-group.open .de-subcategories { display: flex; }
+
+  .de-sub-btn {
+    text-align: left;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius-sm);
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    transition: all 0.15s;
+    margin-top: 0.5rem;
+  }
+
+  .de-sub-btn:first-child { margin-top: 0.75rem; }
+
+  .de-sub-btn:hover {
+    background: rgba(255,230,0,0.05);
+    border-color: rgba(255,230,0,0.3);
+  }
+
+  .de-sub-name {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .de-sub-desc {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .de-sub-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .de-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.58rem;
+    color: var(--amber);
+    border: 1px solid rgba(255,230,0,0.25);
+    border-radius: 10px;
+    padding: 0.15rem 0.5rem;
+    letter-spacing: 0.06em;
+  }
+
+  .de-sessions-done {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    margin-top: 0.4rem;
+  }
+
+  /* SESSION */
+  .de-session-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border-dim);
+    margin-bottom: 1.5rem;
+  }
+
+  .de-session-category {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--amber);
+    opacity: 0.6;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.3rem;
+  }
+
+  .de-session-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  .de-step-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+  }
+
+  .de-step-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+  }
+
+  .de-step-type {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--amber);
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(255,230,0,0.2);
+    border-radius: 10px;
+  }
+
+  .de-progress-wrap {
+    background: rgba(255,255,255,0.07);
+    height: 3px;
+    border-radius: 3px;
+    margin-bottom: 1.75rem;
+  }
+
+  .de-progress-fill {
+    height: 3px;
+    border-radius: 3px;
+    background: var(--amber);
+    box-shadow: 0 0 8px rgba(255,230,0,0.4);
+    transition: width 0.5s ease;
+  }
+
+  .de-scenario-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border-dim);
+    border-left: 3px solid rgba(255,230,0,0.4);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+    min-height: 100px;
+  }
+
+  .de-scenario-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(255,230,0,0.45);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78rem;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+
+  .de-loading-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--amber);
+    animation: pulse 1s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  .de-context-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--amber);
+    opacity: 0.55;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .de-scenario-text {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: var(--text);
+  }
+
+  .de-branch-path {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-dim);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255,230,0,0.5);
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+  }
+
+  .de-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .de-choice {
+    text-align: left;
+    background: var(--bg2);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius);
+    padding: 1rem 1.2rem;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.97rem;
+    line-height: 1.6;
+    transition: all 0.15s;
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+
+  .de-choice:hover {
+    border-color: rgba(255,230,0,0.35);
+    background: rgba(255,230,0,0.04);
+    color: var(--text);
+    transform: translateX(2px);
+  }
+
+  .de-choice.selected {
+    border-color: var(--amber);
+    background: rgba(255,230,0,0.07);
+    color: var(--text);
+    transform: none;
+  }
+
+  .de-choice:disabled { cursor: default; }
+
+  .de-choice-letter {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    color: rgba(255,230,0,0.45);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+    min-width: 20px;
+  }
+
+  .de-consequence {
+    border-left: 3px solid var(--amber);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.25rem;
+    background: rgba(255,230,0,0.04);
+    animation: fadeIn 0.3s ease both;
+  }
+
+  .de-consequence-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--amber);
+    opacity: 0.65;
+    letter-spacing: 0.14em;
+    margin-bottom: 0.6rem;
+    text-transform: uppercase;
+  }
+
+  .de-consequence-text {
+    font-size: 0.97rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 0.8rem;
+  }
+
+  .de-coach-note {
+    font-size: 0.88rem;
+    line-height: 1.75;
+    color: var(--text-dim);
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 0.8rem;
+    font-style: italic;
+  }
+
+  .de-nav {
+    display: none;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-dim);
+    margin-top: 0.5rem;
+  }
+
+  /* DEBRIEF */
+  .de-debrief-score {
+    text-align: center;
+    padding: 2rem 0 1.5rem;
+    border-bottom: 1px solid var(--border-dim);
+    margin-bottom: 2rem;
+  }
+
+  .de-debrief-num {
+    font-family: 'Orbitron', monospace;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--amber);
+    text-shadow: 0 0 30px rgba(255,230,0,0.35);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .de-debrief-sublabel {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-faint);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .de-result-card {
+    background: var(--bg2);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius);
+    padding: 1.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .de-result-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--amber);
+    opacity: 0.55;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .de-result-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-dim);
+  }
+
+  .de-insight-text {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--text-dim);
+  }
+
+  .de-insight-text.loading {
+    color: rgba(255,230,0,0.38);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+
+  .de-choice-recap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .de-recap-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border-dim);
+    font-size: 0.82rem;
+  }
+
+  .de-recap-row:last-child { border-bottom: none; }
+
+  .de-recap-num {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--amber);
+    opacity: 0.5;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    min-width: 18px;
+  }
+
+  .de-recap-decision { color: var(--text-dim); line-height: 1.5; }
+  .de-recap-choice { color: var(--text); font-weight: 600; margin-top: 0.2rem; font-size: 0.8rem; }
+
   /* RESPONSIVE */
   @media (max-width: 600px) {
     html { font-size: 16px; }
@@ -1090,6 +1620,107 @@
   </div>
 
 </main>
+
+<!-- ══════════════════════════════════════════════
+     DECISION ENGINE — separate section below trainer
+══════════════════════════════════════════════ -->
+<div id="decision-engine">
+
+  <!-- HOME -->
+  <div class="de-screen active" id="de-home">
+    <div class="de-header-wrap">
+      <div class="de-eyebrow">// Decision Engine</div>
+      <h2 class="de-title">Practice Making Decisions</h2>
+      <p class="de-intro">Real decisions are hard. This is a safe space to practice them — across every domain of life. Choose a category, work through scenarios, and discover how you naturally decide. No grades. Just insight.</p>
+    </div>
+
+    <div class="de-profile-bar" id="de-profile-bar" style="display:none">
+      <div class="de-profile-label">// Your Decision Profile</div>
+      <div class="de-profile-stats" id="de-profile-stats"></div>
+    </div>
+
+    <div class="de-categories" id="de-categories"></div>
+  </div>
+
+  <!-- SESSION -->
+  <div class="de-screen" id="de-session">
+    <div class="de-session-header">
+      <div>
+        <div class="de-session-category" id="de-session-category"></div>
+        <div class="de-session-title" id="de-session-title"></div>
+      </div>
+      <button class="btn btn-dim" onclick="deGoHome()" style="font-size:0.62rem;flex-shrink:0">← Categories</button>
+    </div>
+
+    <div class="de-step-row">
+      <span class="de-step-label" id="de-step-label">DECISION 1 OF 5</span>
+      <span class="de-step-type" id="de-step-type"></span>
+    </div>
+    <div class="de-progress-wrap"><div class="de-progress-fill" id="de-progress-fill" style="width:0%"></div></div>
+
+    <div class="de-scenario-wrap" id="de-scenario-wrap">
+      <div class="de-scenario-loading" id="de-scenario-loading">
+        <div class="de-loading-dot"></div>
+        <span>Generating your decision scenario...</span>
+      </div>
+      <div id="de-scenario-content" style="display:none">
+        <div class="de-context-label" id="de-context-label"></div>
+        <div class="de-scenario-text" id="de-scenario-text"></div>
+        <div class="de-branch-path" id="de-branch-path" style="display:none"></div>
+      </div>
+    </div>
+
+    <div class="de-choices" id="de-choices"></div>
+
+    <div class="de-consequence" id="de-consequence" style="display:none">
+      <div class="de-consequence-label" id="de-consequence-label"></div>
+      <div class="de-consequence-text" id="de-consequence-text"></div>
+      <div class="de-coach-note" id="de-coach-note"></div>
+    </div>
+
+    <div class="de-nav" id="de-nav" style="display:none">
+      <button class="btn btn-cyan" onclick="deNext()" id="de-btn-next">Next Decision ↗</button>
+      <button class="btn btn-dim" onclick="deGoHome()">← Categories</button>
+    </div>
+  </div>
+
+  <!-- DEBRIEF -->
+  <div class="de-screen" id="de-debrief">
+    <div class="de-session-header">
+      <div>
+        <div class="de-eyebrow">// Session Complete</div>
+        <div class="de-session-title" id="de-debrief-title"></div>
+      </div>
+      <button class="btn btn-dim" onclick="deGoHome()" style="font-size:0.62rem;flex-shrink:0">← Categories</button>
+    </div>
+
+    <div class="de-debrief-score">
+      <div class="de-debrief-num" id="de-debrief-num">5</div>
+      <div class="de-debrief-sublabel">Decisions Practiced</div>
+    </div>
+
+    <div class="de-result-card">
+      <div class="de-result-label">Your Decision Style · This Session</div>
+      <div class="de-insight-text loading" id="de-style-text">Analyzing your decision patterns...</div>
+    </div>
+
+    <div class="de-result-card">
+      <div class="de-result-label">Decision Profile · Cumulative</div>
+      <div id="de-profile-content" class="de-insight-text">Building your profile...</div>
+    </div>
+
+    <div class="de-result-card">
+      <div class="de-result-label">Choices Made This Session</div>
+      <div id="de-choices-summary"></div>
+    </div>
+
+    <div class="de-nav" style="display:flex">
+      <button class="btn btn-cyan" onclick="deRetry()">Practice Again ↗</button>
+      <button class="btn btn-amber" onclick="deGoHome()">New Category ↗</button>
+    </div>
+  </div>
+
+</div><!-- end decision-engine -->
 
 <div class="disclaimer-wrap">
   <div class="disclaimer-label">// Disclaimer</div>
@@ -1546,7 +2177,428 @@ Write a 3–4 sentence insight summary that:
     insightEl.textContent = `Score: ${correct}/${total} on the ${d.label} interface at ${currentDifficulty} difficulty.${missedConcepts ? ' Gaps identified in: ' + missedConcepts + '.' : ' Clean read across all scenarios.'}`;
   }
 }
-</script>
+// ══════════════════════════════════════════════
+// DECISION ENGINE
+// ══════════════════════════════════════════════
+
+const DE_CATEGORIES = [
+  {
+    id: 'stay-alive',
+    icon: '⚡',
+    name: 'Stay Alive',
+    tagline: 'Keep yourself functional at the base layer.',
+    color: '#39ff14',
+    subs: [
+      { id: 'survival', name: 'Survival Decisions', desc: 'What to eat, when to sleep, how to respond to danger and risk.', tags: ['Biology', 'Risk'], topic: 'survival and self-preservation decisions about food, sleep, physical safety, and responding to threats or danger' },
+      { id: 'health', name: 'Health & Energy', desc: 'Exercise, stress management, preventive vs reactive care — quality of life decisions.', tags: ['Medicine', 'Biology'], topic: 'health and energy decisions about exercise, stress management, preventive care, and lifestyle choices that affect wellbeing' }
+    ]
+  },
+  {
+    id: 'feel-better',
+    icon: '◎',
+    name: 'Feel Better',
+    tagline: 'Manage your emotional state deliberately.',
+    color: '#f472b6',
+    subs: [
+      { id: 'emotional', name: 'Emotional Response', desc: 'React vs pause. Hold vs release. Escalate vs de-escalate. You choose the response, not the feeling.', tags: ['Psychology', 'Self-control'], topic: 'emotional response decisions about how to react to difficult feelings, situations, and people — choosing to pause, escalate, or de-escalate' }
+    ]
+  },
+  {
+    id: 'focus-clearly',
+    icon: '◈',
+    name: 'Focus Clearly',
+    tagline: 'Your life is what you pay attention to.',
+    color: '#00fff7',
+    subs: [
+      { id: 'attention', name: 'Attention Decisions', desc: 'What to focus on, what to ignore, where your time actually goes.', tags: ['Cognitive Science', 'Productivity'], topic: 'attention decisions about where to focus, what to ignore, how to allocate time and mental energy across competing priorities' }
+    ]
+  },
+  {
+    id: 'learn-accurately',
+    icon: '◉',
+    name: 'Learn Accurately',
+    tagline: 'What you choose to know shapes everything.',
+    color: '#a78bfa',
+    subs: [
+      { id: 'learning', name: 'Learning Decisions', desc: 'Which skills to develop, depth vs breadth, and knowing when to unlearn.', tags: ['Psychology', 'Growth'], topic: 'learning decisions about which skills to develop, depth vs breadth, how to learn effectively, and when to unlearn outdated knowledge' },
+      { id: 'belief', name: 'Belief Decisions', desc: 'Trusting information sources, updating vs defending beliefs, interpreting reality.', tags: ['Epistemology', 'Cognitive Bias'], topic: 'belief decisions about what information to trust, when to update beliefs vs defend them, and how to interpret conflicting evidence about reality' }
+    ]
+  },
+  {
+    id: 'choose-wisely',
+    icon: '◧',
+    name: 'Choose Wisely',
+    tagline: 'The mechanics of making better decisions.',
+    color: '#ff003c',
+    subs: [
+      { id: 'risk', name: 'Risk Decisions', desc: 'Safe vs uncertain paths. Big bets vs small bets. Knowing when to walk away.', tags: ['Behavioral Economics', 'Strategy'], topic: 'risk decisions about choosing between safe and uncertain paths, making big vs small bets, and knowing when to walk away from a situation' },
+      { id: 'time-horizon', name: 'Time Horizon Decisions', desc: 'Now vs later. Patience vs urgency. This is where most regret is born.', tags: ['Economics', 'Psychology'], topic: 'time horizon decisions about now vs later trade-offs, patience vs urgency, short-term vs long-term thinking and the compounding effects of timing' },
+      { id: 'moral', name: 'Moral & Ethical Decisions', desc: 'Fairness, honesty, responsibility. Self vs others. Principles vs outcomes.', tags: ['Philosophy', 'Ethics'], topic: 'moral and ethical decisions about fairness, honesty, responsibility, when self-interest conflicts with others, and principles vs pragmatic outcomes' }
+    ]
+  },
+  {
+    id: 'connect-selectively',
+    icon: '◑',
+    name: 'Connect Selectively',
+    tagline: 'Who you let in determines a great deal.',
+    color: '#38bdf8',
+    subs: [
+      { id: 'relationship', name: 'Relationship Decisions', desc: 'Who to let into your life, trust, boundaries, forgiveness, and when to stay or leave.', tags: ['Sociology', 'Psychology'], topic: 'relationship decisions about who to trust, how to set boundaries, when to forgive, and when to stay in or leave friendships, partnerships, and collaborations' },
+      { id: 'social', name: 'Social Positioning', desc: 'Status vs authenticity. Conform vs stand out. Speak vs stay silent.', tags: ['Sociology', 'Identity'], topic: 'social positioning decisions about status vs authenticity, when to conform vs stand out, speaking up vs staying silent in social and professional situations' }
+    ]
+  },
+  {
+    id: 'build-intentionally',
+    icon: '◆',
+    name: 'Build Intentionally',
+    tagline: 'How you contribute to the world.',
+    color: '#fb923c',
+    subs: [
+      { id: 'work', name: 'Work & Creation', desc: 'Career path, what to build or create, navigating skill vs passion vs opportunity.', tags: ['Career', 'Entrepreneurship'], topic: 'work and creation decisions about career paths, what to build or create, and navigating the tensions between skill, passion, and market opportunity' },
+      { id: 'identity', name: 'Identity Decisions', desc: 'Your values, standards, and what feels "like me" vs "not like me" — these quietly control everything.', tags: ['Psychology', 'Philosophy'], topic: 'identity decisions about core values, personal standards, and what aligns with or violates your sense of self — decisions that quietly control all other decisions' }
+    ]
+  },
+  {
+    id: 'allocate-resources',
+    icon: '◬',
+    name: 'Allocate Resources',
+    tagline: 'Money, time, and energy are finite.',
+    color: '#ffe600',
+    subs: [
+      { id: 'money', name: 'Money Decisions', desc: 'Spending vs saving vs investing. Risk tolerance. Short vs long-term thinking.', tags: ['Finance', 'Behavioral Economics'], topic: 'money decisions about spending vs saving vs investing, managing risk tolerance, and balancing short-term desires with long-term financial security' }
+    ]
+  },
+  {
+    id: 'manage-risk',
+    icon: '◐',
+    name: 'Manage Risk',
+    tagline: 'What you\'re willing to lose defines your ceiling.',
+    color: '#f87171',
+    subs: [
+      { id: 'environment', name: 'Environment Decisions', desc: 'Geography, culture, digital vs physical spaces. Environment shapes behavior more than willpower.', tags: ['Psychology', 'Sociology'], topic: 'environment decisions about where to place yourself — geography, culture, digital vs physical spaces — knowing that environment shapes behavior more than willpower' },
+      { id: 'adaptation', name: 'Adaptation Decisions', desc: 'Pivot vs persist. Let go vs double down. Reinvent vs refine.', tags: ['Strategy', 'Resilience'], topic: 'adaptation decisions about when to pivot vs persist, let go vs double down, reinvent vs refine — the hardest category because the right answer depends on information you don\'t fully have' }
+    ]
+  },
+  {
+    id: 'act-ethically',
+    icon: '◎',
+    name: 'Act Ethically',
+    tagline: 'Doing right when it costs something.',
+    color: '#34d399',
+    subs: [
+      { id: 'moral2', name: 'Ethics Under Pressure', desc: 'When fairness conflicts with advantage. When honesty has a cost. When principles meet reality.', tags: ['Philosophy', 'Leadership'], topic: 'ethical decisions under pressure — when acting fairly conflicts with personal advantage, when honesty has a real cost, and when principles collide with pragmatic reality' }
+    ]
+  },
+  {
+    id: 'adapt-over-time',
+    icon: '◈',
+    name: 'Adapt Over Time',
+    tagline: 'Change is not failure — rigidity is.',
+    color: '#60a5fa',
+    subs: [
+      { id: 'change', name: 'Change Decisions', desc: 'When to evolve your thinking, habits, relationships, and direction.', tags: ['Growth', 'Psychology'], topic: 'change decisions about when to evolve thinking, habits, relationships, and direction — distinguishing productive persistence from costly rigidity' }
+    ]
+  },
+  {
+    id: 'define-meaning',
+    icon: '◆',
+    name: 'Define Meaning',
+    tagline: 'What it all adds up to.',
+    color: '#c084fc',
+    subs: [
+      { id: 'legacy', name: 'Legacy & Meaning', desc: 'What matters most, what you leave behind, who benefits from your life.', tags: ['Philosophy', 'Purpose'], topic: 'legacy and meaning decisions about what matters most, what you want to leave behind, and who benefits from the choices you make across your lifetime' }
+    ]
+  }
+];
+
+let deCurrentCategory = null;
+let deCurrentSub = null;
+let deSessionDecisions = [];
+let deCurrentStep = 0;
+let deGeneratedSession = null;
+let deGenerating = false;
+const DE_TOTAL = 5;
+
+function deShow(id) {
+  document.querySelectorAll('.de-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function deGoHome() {
+  deCurrentCategory = null; deCurrentSub = null;
+  deSessionDecisions = []; deCurrentStep = 0;
+  deGeneratedSession = null;
+  deRenderCategories();
+  deRenderProfile();
+  deShow('de-home');
+}
+
+function deRetry() {
+  deSessionDecisions = []; deCurrentStep = 0;
+  deGeneratedSession = null;
+  deStartSession(deCurrentCategory, deCurrentSub);
+}
+
+function deRenderProfile() {
+  const profileBar = document.getElementById('de-profile-bar');
+  const statsEl = document.getElementById('de-profile-stats');
+  let totalSessions = 0, totalDecisions = 0, categoriesDone = new Set();
+  DE_CATEGORIES.forEach(cat => {
+    cat.subs.forEach(sub => {
+      try {
+        const h = JSON.parse(localStorage.getItem(`de_history_${sub.id}`) || '[]');
+        if (h.length > 0) { totalSessions += h.length; totalDecisions += h.length * DE_TOTAL; categoriesDone.add(cat.id); }
+      } catch(e) {}
+    });
+  });
+  if (totalSessions === 0) { profileBar.style.display = 'none'; return; }
+  profileBar.style.display = 'block';
+  statsEl.innerHTML = `
+    <div class="de-stat"><div class="de-stat-num">${totalSessions}</div><div class="de-stat-label">Sessions</div></div>
+    <div class="de-stat"><div class="de-stat-num">${totalDecisions}</div><div class="de-stat-label">Decisions Practiced</div></div>
+    <div class="de-stat"><div class="de-stat-num">${categoriesDone.size}</div><div class="de-stat-label">Categories Explored</div></div>
+  `;
+}
+
+function deRenderCategories() {
+  const el = document.getElementById('de-categories');
+  el.innerHTML = '';
+  DE_CATEGORIES.forEach(cat => {
+    const group = document.createElement('div');
+    group.className = 'de-category-group';
+    const subsHTML = cat.subs.map(sub => {
+      let sessionsNote = '';
+      try {
+        const h = JSON.parse(localStorage.getItem(`de_history_${sub.id}`) || '[]');
+        if (h.length > 0) sessionsNote = `<div class="de-sessions-done">✓ Practiced ${h.length} time${h.length>1?'s':''}</div>`;
+      } catch(e) {}
+      return `<button class="de-sub-btn" onclick="deStartSession('${cat.id}','${sub.id}')">
+        <div class="de-sub-name">${sub.name}</div>
+        <div class="de-sub-desc">${sub.desc}</div>
+        <div class="de-sub-tags">${sub.tags.map(t=>`<span class="de-tag">${t}</span>`).join('')}</div>
+        ${sessionsNote}
+      </button>`;
+    }).join('');
+    group.innerHTML = `
+      <div class="de-category-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="de-category-left">
+          <div class="de-category-icon" style="color:${cat.color}">${cat.icon}</div>
+          <div>
+            <div class="de-category-name" style="color:${cat.color}">${cat.name}</div>
+            <div class="de-category-tagline">${cat.tagline}</div>
+          </div>
+        </div>
+        <div class="de-category-toggle">▾</div>
+      </div>
+      <div class="de-subcategories">${subsHTML}</div>`;
+    el.appendChild(group);
+  });
+}
+
+async function deStartSession(catId, subId) {
+  deCurrentCategory = catId;
+  deCurrentSub = subId;
+  deSessionDecisions = [];
+  deCurrentStep = 0;
+  deGeneratedSession = null;
+  deGenerating = true;
+
+  const cat = DE_CATEGORIES.find(c => c.id === catId);
+  const sub = cat.subs.find(s => s.id === subId);
+
+  document.getElementById('de-session-category').textContent = `// ${cat.name}`;
+  document.getElementById('de-session-title').textContent = sub.name;
+  document.getElementById('de-step-label').textContent = `DECISION 1 OF ${DE_TOTAL}`;
+  document.getElementById('de-progress-fill').style.width = '0%';
+  document.getElementById('de-scenario-loading').style.display = 'flex';
+  document.getElementById('de-scenario-content').style.display = 'none';
+  document.getElementById('de-choices').innerHTML = '';
+  document.getElementById('de-consequence').style.display = 'none';
+  document.getElementById('de-nav').style.display = 'none';
+  deShow('de-session');
+
+  const prompt = `You are a warm, insightful decision-making coach. Generate exactly ${DE_TOTAL} decision practice scenarios on the topic: ${sub.topic}.
+
+Mix of formats — include both:
+- SCENARIO type: a situation with 3 choices, each with different trade-offs (no "correct" answer — all are defensible, just different)
+- BRANCH type: a situation where the person makes a choice, then faces a consequence and a follow-up decision
+
+For SCENARIO type, all choices should be genuinely reasonable but reveal different priorities or values.
+For BRANCH type, the consequence should feel real and the follow-up should require a new decision.
+
+The tone should be warm and human — like a thoughtful coach, not a test. Use real, relatable situations from everyday life.
+
+Vary the contexts widely: personal, professional, family, financial, health, relationships, social.
+
+Respond ONLY with valid JSON, no preamble, no markdown:
+{"decisions":[
+  {"type":"scenario","context":"brief situation label","situation":"the scenario text","choices":[{"letter":"A","text":"choice text","reveals":"what this choice reveals about the person's priorities"},{"letter":"B","text":"choice text","reveals":"what this choice reveals"},{"letter":"C","text":"choice text","reveals":"what this choice reveals"}]},
+  {"type":"branch","context":"brief situation label","situation":"the scenario text","choices":[{"letter":"A","text":"choice text"},{"letter":"B","text":"choice text"},{"letter":"C","text":"choice text"}],"consequences":{"A":{"outcome":"what happens next","followup":"follow-up decision they now face","coach":"warm coaching insight"},"B":{"outcome":"what happens next","followup":"follow-up decision they now face","coach":"warm coaching insight"},"C":{"outcome":"what happens next","followup":"follow-up decision they now face","coach":"warm coaching insight"}}}
+]}`;
+
+  try {
+    const res = await fetch('https://gravificer-proxy.mvphillips.workers.dev/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2500, messages: [{ role: 'user', content: prompt }] })
+    });
+    const data = await res.json();
+    const text = data.content.map(i => i.text || '').join('');
+    const clean = text.replace(/```json|```/g, '').trim();
+    deGeneratedSession = JSON.parse(clean).decisions;
+  } catch(e) { deGeneratedSession = null; }
+
+  deGenerating = false;
+  deLoadStep();
+}
+
+function deLoadStep() {
+  if (!deGeneratedSession) {
+    document.getElementById('de-scenario-loading').style.display = 'none';
+    document.getElementById('de-scenario-content').style.display = 'block';
+    document.getElementById('de-scenario-text').textContent = 'Could not generate scenarios. Please try again.';
+    document.getElementById('de-choices').innerHTML = '';
+    return;
+  }
+
+  const step = deGeneratedSession[deCurrentStep];
+  document.getElementById('de-step-label').textContent = `DECISION ${deCurrentStep + 1} OF ${DE_TOTAL}`;
+  document.getElementById('de-progress-fill').style.width = `${(deCurrentStep / DE_TOTAL) * 100}%`;
+  document.getElementById('de-step-type').textContent = step.type === 'branch' ? 'BRANCHING' : 'SCENARIO';
+  document.getElementById('de-consequence').style.display = 'none';
+  document.getElementById('de-nav').style.display = 'none';
+  document.getElementById('de-branch-path').style.display = 'none';
+  document.getElementById('de-scenario-loading').style.display = 'none';
+  document.getElementById('de-scenario-content').style.display = 'block';
+  document.getElementById('de-context-label').textContent = `// ${step.context || ''}`;
+  document.getElementById('de-scenario-text').textContent = step.situation;
+
+  const choicesEl = document.getElementById('de-choices');
+  choicesEl.innerHTML = '';
+  step.choices.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'de-choice';
+    btn.innerHTML = `<span class="de-choice-letter">[${c.letter}]</span><span>${c.text}</span>`;
+    btn.onclick = () => deHandleChoice(c.letter);
+    choicesEl.appendChild(btn);
+  });
+}
+
+function deHandleChoice(letter) {
+  const step = deGeneratedSession[deCurrentStep];
+  document.querySelectorAll('.de-choice').forEach(btn => {
+    btn.disabled = true;
+    if (btn.textContent.includes(`[${letter}]`)) btn.classList.add('selected');
+  });
+
+  const choiceObj = step.choices.find(c => c.letter === letter);
+  deSessionDecisions.push({ step: deCurrentStep, type: step.type, situation: step.situation, context: step.context, choiceLetter: letter, choiceText: choiceObj.text, reveals: choiceObj.reveals || '' });
+
+  const consEl = document.getElementById('de-consequence');
+  const consLabel = document.getElementById('de-consequence-label');
+  const consText = document.getElementById('de-consequence-text');
+  const coachNote = document.getElementById('de-coach-note');
+  const branchPath = document.getElementById('de-branch-path');
+
+  if (step.type === 'branch' && step.consequences && step.consequences[letter]) {
+    const cons = step.consequences[letter];
+    consLabel.textContent = '// What Happens Next';
+    consText.textContent = cons.outcome;
+    coachNote.textContent = cons.coach || '';
+    branchPath.textContent = `Next decision: ${cons.followup}`;
+    branchPath.style.display = 'block';
+    consEl.style.display = 'block';
+  } else if (step.type === 'scenario' && choiceObj.reveals) {
+    consLabel.textContent = '// What This Choice Reveals';
+    consText.textContent = '';
+    coachNote.textContent = choiceObj.reveals;
+    branchPath.style.display = 'none';
+    consEl.style.display = 'block';
+  }
+
+  const isLast = deCurrentStep >= DE_TOTAL - 1;
+  document.getElementById('de-btn-next').textContent = isLast ? 'See My Debrief ↗' : 'Next Decision ↗';
+  document.getElementById('de-nav').style.display = 'flex';
+}
+
+function deNext() {
+  if (deCurrentStep >= DE_TOTAL - 1) { deShowDebrief(); return; }
+  deCurrentStep++;
+  deLoadStep();
+}
+
+async function deShowDebrief() {
+  const cat = DE_CATEGORIES.find(c => c.id === deCurrentCategory);
+  const sub = cat.subs.find(s => s.id === deCurrentSub);
+
+  // Save history
+  const histKey = `de_history_${deCurrentSub}`;
+  let hist = [];
+  try { hist = JSON.parse(localStorage.getItem(histKey) || '[]'); } catch(e) {}
+  hist.unshift({ date: new Date().toLocaleDateString(), decisions: deSessionDecisions.length });
+  if (hist.length > 20) hist = hist.slice(0, 20);
+  try { localStorage.setItem(histKey, JSON.stringify(hist)); } catch(e) {}
+
+  document.getElementById('de-debrief-title').textContent = sub.name;
+  document.getElementById('de-debrief-num').textContent = deSessionDecisions.length;
+
+  // Choices recap
+  const recapEl = document.getElementById('de-choices-summary');
+  recapEl.innerHTML = `<div class="de-choice-recap">${deSessionDecisions.map((d, i) => `
+    <div class="de-recap-row">
+      <div class="de-recap-num">${i + 1}</div>
+      <div>
+        <div class="de-recap-decision">${d.context}</div>
+        <div class="de-recap-choice">→ ${d.choiceText}</div>
+      </div>
+    </div>`).join('')}</div>`;
+
+  // Cumulative profile
+  let totalSessions = 0;
+  DE_CATEGORIES.forEach(c => c.subs.forEach(s => {
+    try { totalSessions += JSON.parse(localStorage.getItem(`de_history_${s.id}`) || '[]').length; } catch(e) {}
+  }));
+  document.getElementById('de-profile-content').textContent = `You've now completed ${totalSessions} decision practice session${totalSessions !== 1 ? 's' : ''} across the Decision Engine. Each session builds your awareness of how you naturally approach trade-offs, uncertainty, and competing values. Your profile grows with each category you explore.`;
+
+  deShow('de-debrief');
+
+  // Generate style debrief via Claude
+  const styleEl = document.getElementById('de-style-text');
+  const choicesSummary = deSessionDecisions.map((d, i) => `Decision ${i+1} (${d.context}): Chose "${d.choiceText}"`).join('\n');
+  const stylePrompt = `You are a warm, insightful decision-making coach generating a personalized debrief after a practice session.
+
+Category: ${sub.name} (${sub.topic})
+Choices made:
+${choicesSummary}
+
+Write a 3–4 sentence personal decision style debrief that:
+- Identifies what the pattern of choices reveals about this person's decision-making style in this category
+- Names their apparent priorities and values based on what they chose
+- Is warm, curious, and encouraging — it should make them feel understood, not judged
+- Ends with one insight or question that invites them to reflect further
+- Feels like it comes from a thoughtful coach who genuinely finds them interesting
+- No headers, no lists — flowing, conversational prose
+- Second person`;
+
+  try {
+    const r = await fetch('https://gravificer-proxy.mvphillips.workers.dev/', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: stylePrompt }] })
+    });
+    const d = await r.json();
+    styleEl.className = 'de-insight-text';
+    styleEl.textContent = d.content.map(i => i.text || '').join('').trim();
+  } catch(e) {
+    styleEl.className = 'de-insight-text';
+    styleEl.textContent = `You completed ${deSessionDecisions.length} decisions in the ${sub.name} category. Your choices reflect a particular approach to this domain — keep practicing to see the patterns emerge more clearly.`;
+  }
+}
+
+// Initialize Decision Engine
+deRenderCategories();
+deRenderProfile();
+
 
 </body>
 </html>
