@@ -252,7 +252,7 @@
     background: var(--bg2);
     border: 1px solid var(--border-dim);
     border-radius: var(--radius);
-    padding: 1.6rem 1.4rem 1.8rem;
+    padding: 1.4rem 1.3rem 1.6rem;
     cursor: pointer;
     position: relative;
     transition: background 0.2s, border-color 0.2s, transform 0.15s;
@@ -269,10 +269,14 @@
   .iface-card:hover .iface-label { color: var(--card-accent); }
   .iface-card:hover .iface-arrow { opacity: 1; transform: translateX(0); }
 
-  .iface-card.mind   { --card-accent: var(--cyan); }
-  .iface-card.body   { --card-accent: var(--green); }
-  .iface-card.choice { --card-accent: var(--magenta); }
-  .iface-card.value  { --card-accent: var(--amber); }
+  .iface-card.mind     { --card-accent: var(--cyan); }
+  .iface-card.body     { --card-accent: var(--green); }
+  .iface-card.choice   { --card-accent: var(--magenta); }
+  .iface-card.value    { --card-accent: var(--amber); }
+  .iface-card.reality  { --card-accent: #a78bfa; }
+  .iface-card.signal   { --card-accent: #38bdf8; }
+  .iface-card.marketing { --card-accent: #fb923c; }
+  .iface-card.entrepreneurship { --card-accent: #f472b6; }
 
   .iface-num {
     font-family: 'Share Tech Mono', monospace;
@@ -949,6 +953,38 @@
         <div class="iface-desc">How scarcity, incentives, and exchange determine what anything is actually worth.</div>
         <div class="iface-arrow">↗</div>
       </div>
+      <div class="iface-card reality" onclick="enterDomain('reality')">
+        <div class="iface-num">// INTERFACE 05</div>
+        <span class="iface-symbol">◎</span>
+        <div class="iface-label">Reality</div>
+        <div class="iface-domain">PHYSICS / BIOLOGY</div>
+        <div class="iface-desc">The laws that govern matter, energy, and life — and why ignoring them always costs you.</div>
+        <div class="iface-arrow">↗</div>
+      </div>
+      <div class="iface-card signal" onclick="enterDomain('signal')">
+        <div class="iface-num">// INTERFACE 06</div>
+        <span class="iface-symbol">◑</span>
+        <div class="iface-label">Signal</div>
+        <div class="iface-domain">COMMUNICATION</div>
+        <div class="iface-desc">How meaning is encoded, transmitted, distorted, and decoded — and where it breaks down.</div>
+        <div class="iface-arrow">↗</div>
+      </div>
+      <div class="iface-card marketing" onclick="enterDomain('marketing')">
+        <div class="iface-num">// INTERFACE 07</div>
+        <span class="iface-symbol">◐</span>
+        <div class="iface-label">Marketing</div>
+        <div class="iface-domain">MBA · MARKETING ANALYTICS</div>
+        <div class="iface-desc">How data, behavior, and strategy combine to move markets and measure what actually works.</div>
+        <div class="iface-arrow">↗</div>
+      </div>
+      <div class="iface-card entrepreneurship" onclick="enterDomain('entrepreneurship')">
+        <div class="iface-num">// INTERFACE 08</div>
+        <span class="iface-symbol">◆</span>
+        <div class="iface-label">Venture</div>
+        <div class="iface-domain">MBA · ENTREPRENEURSHIP</div>
+        <div class="iface-desc">The forces that determine whether a new venture survives, scales, or collapses under its own weight.</div>
+        <div class="iface-arrow">↗</div>
+      </div>
     </div>
 
     <div class="axiom-bar" style="border-left-color:rgba(255,230,0,0.3);color:rgba(255,230,0,0.4);background:rgba(255,230,0,0.02)">
@@ -1115,6 +1151,50 @@ const DOMAINS = {
       { name: 'Incentive Misalignment', tagline: 'Systems optimize for what they measure, not what they want.', body: 'When incentives diverge from intended outcomes, the system produces perverse results reliably. Goodhart\'s Law: when a measure becomes a target, it ceases to be a good measure.', signal: 'Signal: Before designing any system, ask: what will this incentive structure actually reward?' },
       { name: 'Marginal Thinking', tagline: 'Decisions happen at the margin, not in the aggregate.', body: 'Economic decisions are not made about totals — they are made about the next unit. The marginal value of the first unit can be enormous; the tenth, nearly zero. Fixed costs are irrelevant at the margin.', signal: 'Signal: Don\'t ask "is this worth doing?" Ask "is this next unit worth the cost of this next unit?"' },
       { name: 'Price Signals', tagline: 'Prices carry information that planning cannot replicate.', body: 'Prices aggregate distributed knowledge across millions of actors. When prices are suppressed, that information disappears. Shortages appear. Resources misallocate. The price system transmits information at unmatched speed and scale.', signal: 'Signal: When prices feel wrong, ask what information they might be carrying that you\'re not seeing yet.' }
+    ]
+  },
+  reality: {
+    label: 'Reality', sub: 'Physics / Biology · Natural Law',
+    badge: '// Interface 05 — Reality', accent: '#a78bfa',
+    description: 'physics, biology, thermodynamics, entropy, evolution, systems thinking, energy conservation, emergence, feedback loops, natural selection, complexity',
+    concepts: [
+      { name: 'Entropy', tagline: 'Everything tends toward disorder — including your systems.', body: 'The second law of thermodynamics states that entropy in a closed system always increases. Order requires continuous energy input to maintain. Organizations, relationships, and habits all decay without active maintenance.', signal: 'Signal: If you\'re not actively building order, entropy is actively building disorder.' },
+      { name: 'Feedback Loops', tagline: 'Systems amplify or dampen their own outputs.', body: 'Positive feedback loops amplify change — small shifts compound into large effects. Negative feedback loops resist change — deviations are corrected back toward equilibrium. Most complex systems contain both, producing non-linear, often counterintuitive behavior.', signal: 'Signal: Before intervening in a system, identify which loops are dominant — amplifying or stabilizing.' },
+      { name: 'Natural Selection', tagline: 'What survives is what fits the environment — not what is objectively best.', body: 'Evolution selects for fitness to current conditions, not for perfection. A trait that thrives in one environment is a liability in another. Businesses, ideas, and behaviors follow the same logic — context determines survival.', signal: 'Signal: Ask not "is this good?" but "is this fit for the environment it\'s actually in?"' },
+      { name: 'Emergence', tagline: 'Complex behavior arises from simple rules at scale.', body: 'Properties emerge at the system level that are not present in any individual component. Consciousness from neurons. Markets from buyers and sellers. Culture from individuals. You cannot predict the emergent property by studying the parts alone.', signal: 'Signal: To understand a system\'s behavior, study its interactions — not just its components.' }
+    ]
+  },
+  signal: {
+    label: 'Signal', sub: 'Communication · Information Architecture',
+    badge: '// Interface 06 — Signal', accent: '#38bdf8',
+    description: 'communication, information theory, signal vs noise, encoding and decoding, framing, persuasion, rhetoric, media, listening, context, message distortion, nonverbal communication',
+    concepts: [
+      { name: 'Signal vs Noise', tagline: 'Most of what gets transmitted is not what matters.', body: 'Every communication channel carries both signal — the intended meaning — and noise — distortion, irrelevance, and interference. High-noise communication is not just inefficient; it actively degrades the signal. Clarity requires subtraction, not addition.', signal: 'Signal: Before adding more information, ask: what noise am I also adding?' },
+      { name: 'Framing Effects', tagline: 'How you say it shapes what they hear.', body: 'The same information presented in different frames produces different responses. "90% survival rate" and "10% mortality rate" are identical facts that generate different emotional and behavioral reactions. Framing is not manipulation — it is unavoidable. The question is whether you choose it deliberately.', signal: 'Signal: You are always framing. The only choice is whether you do it consciously.' },
+      { name: 'Context Collapse', tagline: 'A message built for one audience reaches all audiences simultaneously.', body: 'Digital communication destroys the contextual boundaries that once separated different audiences. A message calibrated for colleagues reaches family, strangers, and adversaries equally. What was appropriate in one context becomes a liability in all the others.', signal: 'Signal: Before publishing anything, ask: who else will read this, and what will it mean to them?' },
+      { name: 'The Listening Gap', tagline: 'Most people are preparing their response, not receiving your message.', body: 'Research consistently shows that people retain a fraction of what they hear in conversation. Cognitive load, self-referencing, and response preparation all compete with actual listening. The speaker assumes understanding; the listener assumes they understood.', signal: 'Signal: Comprehension is not the default. Confirmation of understanding is a separate, required step.' }
+    ]
+  },
+  marketing: {
+    label: 'Marketing', sub: 'MBA · Marketing Analytics',
+    badge: '// Interface 07 — Marketing', accent: '#fb923c',
+    description: 'marketing analytics, customer segmentation, conversion funnels, attribution modeling, A/B testing, customer lifetime value, brand positioning, pricing strategy, market research, digital marketing metrics, ROI, cohort analysis',
+    concepts: [
+      { name: 'Customer Lifetime Value', tagline: 'Acquisition cost only makes sense relative to long-term value.', body: 'CLV is the total revenue a business can expect from a single customer over the entire relationship. A customer who costs $200 to acquire but generates $2,000 over three years is a far better investment than one who costs $50 and churns after one purchase. Most companies optimize acquisition without measuring retention.', signal: 'Signal: If you don\'t know your CLV, you don\'t know whether your marketing is profitable.' },
+      { name: 'Attribution Modeling', tagline: 'The last touch rarely deserves all the credit.', body: 'Customers interact with multiple touchpoints before converting. Last-click attribution assigns 100% of credit to the final interaction, systematically undervaluing awareness channels like content and social. Multi-touch attribution distributes credit across the journey — a more accurate but more complex picture.', signal: 'Signal: What you measure gets funded. Wrong attribution models kill the channels that actually drive growth.' },
+      { name: 'Segmentation', tagline: 'Average customers don\'t exist — only segments do.', body: 'Marketing to an "average" customer means marketing to no one precisely. Effective segmentation identifies groups with meaningfully different needs, behaviors, or values — and creates distinct strategies for each. Over-segmentation creates complexity; under-segmentation creates waste.', signal: 'Signal: The right segment size is the smallest group you can serve profitably and distinctly.' },
+      { name: 'Conversion Funnel', tagline: 'Most leaks are invisible until you measure each stage.', body: 'The conversion funnel maps the customer journey from awareness to purchase. Each stage loses a percentage of prospects. The highest-leverage intervention is almost never at the bottom of the funnel — it\'s at the stage with the largest unexplained drop-off.', signal: 'Signal: Don\'t optimize the checkout page until you know where you\'re actually losing people.' }
+    ]
+  },
+  entrepreneurship: {
+    label: 'Venture', sub: 'MBA · Entrepreneurship',
+    badge: '// Interface 08 — Venture', accent: '#f472b6',
+    description: 'entrepreneurship, venture building, product-market fit, unit economics, fundraising, go-to-market strategy, team building, pivoting, burn rate, competitive moats, scaling, startup failure modes, business model design',
+    concepts: [
+      { name: 'Product-Market Fit', tagline: 'Until you have it, nothing else matters. After you have it, everything else accelerates.', body: 'PMF is the degree to which a product satisfies strong market demand. The signal is retention, not acquisition — customers come back without being pushed. Most startups fail not because they can\'t build, but because they build something the market doesn\'t urgently need.', signal: 'Signal: If you have to convince customers they need your product, you probably don\'t have PMF yet.' },
+      { name: 'Unit Economics', tagline: 'Scale amplifies your margin structure — for better or worse.', body: 'Unit economics describes the revenues and costs associated with a single business unit. A company with negative unit economics loses more money with every sale — scale makes it worse, not better. Sustainable businesses have positive contribution margin before scaling, not after.', signal: 'Signal: Growth is only valuable when the underlying unit is profitable. Otherwise, you\'re just accelerating the loss.' },
+      { name: 'The Pivot', tagline: 'Pivoting is not failure — staying on a dead hypothesis is.', body: 'A pivot is a structured course correction that preserves what has been learned while changing the strategy. The hardest part is distinguishing between "we need more time on this hypothesis" and "this hypothesis is wrong." Founders who pivot too late run out of runway. Those who pivot too early never test deeply enough.', signal: 'Signal: Define in advance what would prove your core hypothesis wrong. Then watch for those signals.' },
+      { name: 'Competitive Moats', tagline: 'Advantages erode unless they are structural.', body: 'A moat is a durable competitive advantage that protects a business from competitors. Network effects, switching costs, proprietary data, and economies of scale are structural moats. First-mover advantage, brand, and superior execution are not — they are leaderships that can be closed. Only structural moats compound over time.', signal: 'Signal: Ask not "why are we winning now?" but "what makes it structurally harder to beat us next year than this year?"' }
     ]
   }
 };
