@@ -821,6 +821,19 @@
     margin-bottom: 0.3rem;
   }
 
+  .hist-row {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.6rem;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+  }
+
+  .hist-date { color: var(--text-faint); width: 70px; flex-shrink: 0; }
+  .hist-diff { color: var(--text-faint); width: 65px; flex-shrink: 0; }
+  .hist-score { width: 36px; text-align: right; flex-shrink: 0; font-weight: 600; }
+
   /* DISCLAIMER */
   .disclaimer-wrap {
     position: relative;
@@ -1013,9 +1026,10 @@
     </div>
 
     <div class="score-display">
-      <div class="score-num" id="score-num">0/4</div>
+      <div class="score-num" id="score-num">0/9</div>
       <div class="score-label">Scenarios Read Correctly</div>
       <div class="score-diff" id="score-diff"></div>
+      <div class="score-diff" id="streak-display" style="margin-top:0.5rem;font-size:0.75rem;letter-spacing:0.14em"></div>
     </div>
 
     <div class="result-card">
@@ -1026,6 +1040,11 @@
     <div class="result-card">
       <div class="result-card-label">Decision Map · How You Weighted Reality</div>
       <div id="decision-map" style="margin-top:0.2rem"></div>
+    </div>
+
+    <div class="result-card" id="history-card" style="display:none">
+      <div class="result-card-label">Session History · This Interface</div>
+      <div id="session-history"></div>
     </div>
 
     <div class="nav-row">
@@ -1196,7 +1215,7 @@ async function generateAllScenarios() {
     edge: 'Counterintuitive edge cases that challenge assumptions and apparent exceptions to principles.'
   };
 
-  const prompt = `You are the Gravificer Reality Interface Trainer — a precision learning instrument. Generate exactly 4 scenario-based questions testing deep understanding of the ${d.label} interface (${d.description}).
+  const prompt = `You are the Gravificer Reality Interface Trainer — a precision learning instrument. Generate exactly 9 scenario-based questions testing deep understanding of the ${d.label} interface (${d.description}).
 
 Difficulty: ${currentDifficulty.toUpperCase()} — ${diffMap[currentDifficulty]}
 
@@ -1206,9 +1225,10 @@ Rules:
 - Exactly one mechanistically correct answer
 - Wrong answers are plausible but reveal a misreading of the interface
 - Feedback explains the mechanism at a systems level — not just what is correct but why
-- Each scenario tests a different core concept within the domain
-- Vary contexts: personal, professional, social, physical, financial
+- Each scenario tests a different core concept within the domain — vary widely across the 9 scenarios
+- Vary contexts: personal, professional, social, physical, financial, creative, athletic, relational
 - Generate fresh, original scenarios — not standard textbook examples
+- Build from concrete to complex across the 9 scenarios
 
 Respond ONLY with valid JSON, no preamble, no markdown:
 {"scenarios":[{"concept":"concept name","question":"scenario text","choices":["A","B","C","D"],"correct":0,"feedback":"mechanistic explanation"}]}`;
@@ -1219,7 +1239,7 @@ Respond ONLY with valid JSON, no preamble, no markdown:
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
+        max_tokens: 2500,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -1237,7 +1257,7 @@ Respond ONLY with valid JSON, no preamble, no markdown:
 function loadScenario() {
   answered = false;
   const idx = currentScenarioIndex;
-  const total = 4;
+  const total = 9;
 
   document.getElementById('step-label').textContent = `SCENARIO ${idx + 1} OF ${total}`;
   document.getElementById('progress-fill').style.width = `${(idx / total) * 100}%`;
@@ -1297,13 +1317,13 @@ function handleChoice(chosen) {
   document.getElementById('feedback-content').textContent = s.feedback;
   fb.style.display = 'block';
 
-  const isLast = currentScenarioIndex >= 3;
+  const isLast = currentScenarioIndex >= 8;
   document.getElementById('btn-next').textContent = isLast ? 'View Interface Report ↗' : 'Next Scenario ↗';
   document.getElementById('nav-row').style.display = 'flex';
 }
 
 function nextScenario() {
-  if (currentScenarioIndex >= 3) { showResults(); return; }
+  if (currentScenarioIndex >= 8) { showResults(); return; }
   currentScenarioIndex++;
   loadScenario();
 }
@@ -1325,16 +1345,58 @@ function retryDomain() {
 
 async function showResults() {
   const correct = sessionResults.filter(r => r.correct).length;
+  const total = 9;
   const d = DOMAINS[currentDomain];
+
+  // Save to session history
+  const historyKey = `rit_history_${currentDomain}`;
+  let history = [];
+  try { history = JSON.parse(localStorage.getItem(historyKey) || '[]'); } catch(e) {}
+  const newEntry = { score: correct, total, difficulty: currentDifficulty, date: new Date().toLocaleDateString() };
+  history.unshift(newEntry);
+  if (history.length > 10) history = history.slice(0, 10);
+  try { localStorage.setItem(historyKey, JSON.stringify(history)); } catch(e) {}
+
+  // Streak tracking
+  const streakKey = `rit_streak_${currentDomain}`;
+  let streak = 0;
+  try { streak = parseInt(localStorage.getItem(streakKey) || '0'); } catch(e) {}
+  const passed = correct >= Math.ceil(total * 0.7);
+  streak = passed ? streak + 1 : 0;
+  try { localStorage.setItem(streakKey, streak); } catch(e) {}
 
   document.getElementById('results-title').textContent = d.label + ' Interface';
   document.getElementById('results-title').style.color = d.accent;
 
   const scoreEl = document.getElementById('score-num');
-  scoreEl.textContent = `${correct}/4`;
-  scoreEl.style.color = correct >= 3 ? 'var(--green)' : correct >= 2 ? 'var(--amber)' : 'var(--magenta)';
-  scoreEl.style.textShadow = correct >= 3 ? '0 0 30px rgba(57,255,20,0.4)' : correct >= 2 ? '0 0 30px rgba(255,230,0,0.4)' : '0 0 30px rgba(255,0,60,0.4)';
+  scoreEl.textContent = `${correct}/${total}`;
+  scoreEl.style.color = correct >= 7 ? 'var(--green)' : correct >= 5 ? 'var(--amber)' : 'var(--magenta)';
+  scoreEl.style.textShadow = correct >= 7 ? '0 0 30px rgba(57,255,20,0.4)' : correct >= 5 ? '0 0 30px rgba(255,230,0,0.4)' : '0 0 30px rgba(255,0,60,0.4)';
   document.getElementById('score-diff').textContent = `${currentDifficulty.toUpperCase()} DIFFICULTY`;
+
+  // Streak display
+  const streakEl = document.getElementById('streak-display');
+  if (streakEl) {
+    streakEl.textContent = streak > 0 ? `SESSION STREAK — ${streak}` : '';
+    streakEl.style.color = streak >= 3 ? 'var(--green)' : 'var(--amber)';
+  }
+
+  // Session history display
+  const histEl = document.getElementById('session-history');
+  if (histEl && history.length > 1) {
+    histEl.innerHTML = history.slice(1, 6).map(h => `
+      <div class="hist-row">
+        <span class="hist-date">${h.date}</span>
+        <span class="hist-diff">${h.difficulty.toUpperCase()}</span>
+        <div class="dm-bar-wrap" style="flex:1;margin:0 0.75rem">
+          <div class="dm-bar-fill" style="background:${h.score/h.total>=0.7?'var(--green)':h.score/h.total>=0.55?'var(--amber)':'var(--magenta)'};width:${Math.round((h.score/h.total)*100)}%"></div>
+        </div>
+        <span class="hist-score" style="color:${h.score/h.total>=0.7?'var(--green)':h.score/h.total>=0.55?'var(--amber)':'var(--magenta)'}">${h.score}/${h.total}</span>
+      </div>`).join('');
+    document.getElementById('history-card').style.display = 'block';
+  } else if (document.getElementById('history-card')) {
+    document.getElementById('history-card').style.display = 'none';
+  }
 
   // Decision map
   const dmEl = document.getElementById('decision-map');
@@ -1363,18 +1425,21 @@ async function showResults() {
   const insightEl = document.getElementById('insight-text');
   const missedConcepts = sessionResults.filter(r => !r.correct).map(r => r.concept).join(', ');
   const readConcepts = sessionResults.filter(r => r.correct).map(r => r.concept).join(', ');
+  const prevScores = history.slice(1, 4).map(h => `${h.score}/${h.total}`).join(', ');
 
   const insightPrompt = `You are Gravificer — a precision signal architecture system generating a personalized insight report.
 
 Domain tested: ${d.label} (${d.description})
-Score: ${correct}/4 at ${currentDifficulty} difficulty
+Score: ${correct}/${total} at ${currentDifficulty} difficulty
 Concepts read correctly: ${readConcepts || 'none'}
 Concepts missed: ${missedConcepts || 'none'}
+Previous session scores: ${prevScores || 'first session'}
+Current streak: ${streak} session${streak !== 1 ? 's' : ''}
 
 Write a 3–4 sentence insight summary in the Gravificer voice:
 - Analytical, not consoling or congratulatory
 - Identify the specific pattern in what was missed (if any)
-- Name what this reveals about their mental model of the ${d.label} interface
+- If previous scores exist, note whether performance is improving, declining, or consistent
 - End with one sharp reframe or actionable signal
 - No headers, no bullet points — prose only
 - Gravificer standard: every sentence must clarify, reveal, or reframe. No filler.
@@ -1396,7 +1461,7 @@ Write a 3–4 sentence insight summary in the Gravificer voice:
     insightEl.textContent = txt;
   } catch (e) {
     insightEl.className = 'insight-text';
-    insightEl.textContent = `Score: ${correct}/4 on the ${d.label} interface at ${currentDifficulty} difficulty.${missedConcepts ? ' Gaps identified in: ' + missedConcepts + '.' : ' Clean read across all scenarios.'}`;
+    insightEl.textContent = `Score: ${correct}/${total} on the ${d.label} interface at ${currentDifficulty} difficulty.${missedConcepts ? ' Gaps identified in: ' + missedConcepts + '.' : ' Clean read across all scenarios.'}`;
   }
 }
 </script>
