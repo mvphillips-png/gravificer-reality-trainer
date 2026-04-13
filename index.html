@@ -1743,7 +1743,7 @@
     </div>
 
     <div class="de-step-row">
-      <span class="de-step-label" id="de-step-label">DECISION 1 OF 4</span>
+      <span class="de-step-label" id="de-step-label">DECISION 1 OF 3</span>
       <span class="de-step-type" id="de-step-type"></span>
     </div>
     <div class="de-progress-wrap"><div class="de-progress-fill" id="de-progress-fill" style="width:0%"></div></div>
@@ -2042,7 +2042,7 @@ async function generateAllScenarios() {
     edge: 'Counterintuitive edge cases that challenge assumptions and apparent exceptions to principles.'
   };
 
-  const prompt = `You are the Gravificer Reality Interface Trainer — a precision learning instrument. Generate exactly 5 scenario-based questions testing deep understanding of the ${d.label} interface (${d.description}).
+  const prompt = `You are the Gravificer Reality Interface Trainer — a precision learning instrument. Generate exactly 3 scenario-based questions testing deep understanding of the ${d.label} interface (${d.description}).
 
 Difficulty: ${currentDifficulty.toUpperCase()} — ${diffMap[currentDifficulty]}
 
@@ -2067,7 +2067,7 @@ Respond ONLY with valid JSON, no preamble, no markdown:
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1500,
+        max_tokens: 1200,
         messages: [{ role: 'user', content: prompt }]
       })
     });
@@ -2095,7 +2095,7 @@ Respond ONLY with valid JSON, no preamble, no markdown:
 function loadScenario() {
   answered = false;
   const idx = currentScenarioIndex;
-  const total = 5;
+  const total = 3;
 
   document.getElementById('step-label').textContent = `SCENARIO ${idx + 1} OF ${total}`;
   document.getElementById('progress-fill').style.width = `${(idx / total) * 100}%`;
@@ -2168,13 +2168,13 @@ function handleChoice(chosen) {
   document.getElementById('feedback-content').textContent = s.feedback;
   fb.style.display = 'block';
 
-  const isLast = currentScenarioIndex >= 4;
+  const isLast = currentScenarioIndex >= 2;
   document.getElementById('btn-next').textContent = isLast ? 'View Interface Report ↗' : 'Next Scenario ↗';
   document.getElementById('nav-row').style.display = 'flex';
 }
 
 function nextScenario() {
-  if (currentScenarioIndex >= 4) { showResults(); return; }
+  if (currentScenarioIndex >= 2) { showResults(); return; }
   currentScenarioIndex++;
   loadScenario();
 }
@@ -2203,7 +2203,7 @@ function retryDomain() {
 
 async function showResults() {
   const correct = sessionResults.filter(r => r.correct).length;
-  const total = 5;
+  const total = 3;
   const d = DOMAINS[currentDomain];
 
   // Save to session history
@@ -2288,7 +2288,7 @@ async function showResults() {
   const insightPrompt = `You are Gravificer — a precision learning system generating a personalized insight report after a training session.
 
 Domain tested: ${d.label} (${d.description})
-Score: ${correct}/5 at ${currentDifficulty} difficulty
+Score: ${correct}/3 at ${currentDifficulty} difficulty
 Concepts read correctly: ${readConcepts || 'none'}
 Concepts missed: ${missedConcepts || 'none'}
 Previous session scores: ${prevScores || 'first session'}
@@ -2463,7 +2463,7 @@ let deSessionDecisions = [];
 let deCurrentStep = 0;
 let deGeneratedSession = null;
 let deGenerating = false;
-const DE_TOTAL = 4;
+const DE_TOTAL = 3;
 
 function deShow(id) {
   document.querySelectorAll('.de-screen').forEach(s => s.classList.remove('active'));
