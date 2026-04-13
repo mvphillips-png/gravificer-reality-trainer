@@ -270,6 +270,8 @@
   .iface-card.signal       { background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 50%, #075985 100%); --card-dark: #012240; }
   .iface-card.marketing    { background: linear-gradient(135deg, #fdba74 0%, #fb923c 50%, #7c2d12 100%); --card-dark: #2e1000; }
   .iface-card.entrepreneurship { background: linear-gradient(135deg, #f9a8d4 0%, #f472b6 50%, #831843 100%); --card-dark: #2e0025; }
+  .iface-card.predicting   { background: linear-gradient(135deg, #d9f99d 0%, #84cc16 50%, #365314 100%); --card-dark: #1a2e00; }
+  .iface-card.probability  { background: linear-gradient(135deg, #e0f2fe 0%, #38bdf8 40%, #0369a1 100%); --card-dark: #012240; }
 
   .iface-num {
     font-family: 'Share Tech Mono', monospace;
@@ -1853,6 +1855,22 @@
         <div class="iface-desc">The forces that determine whether a new venture survives, scales, or collapses under its own weight.</div>
         <div class="iface-arrow">↗</div>
       </div>
+      <div class="iface-card predicting" onclick="enterDomain('predicting')">
+        <div class="iface-num">// INTERFACE 09</div>
+        <span class="iface-symbol">◭</span>
+        <div class="iface-label">Predicting</div>
+        <div class="iface-domain">FORECASTING · WORLDVIEW</div>
+        <div class="iface-desc">How to build a sharper worldview by making calibrated forecasts — and knowing when you're likely wrong.</div>
+        <div class="iface-arrow">↗</div>
+      </div>
+      <div class="iface-card probability" onclick="enterDomain('probability')">
+        <div class="iface-num">// INTERFACE 10</div>
+        <span class="iface-symbol">◫</span>
+        <div class="iface-label">Probability</div>
+        <div class="iface-domain">PROBABILISTIC THINKING</div>
+        <div class="iface-desc">Think in percentages, not certainties. Estimate frequency, measure confidence, and combine evidence.</div>
+        <div class="iface-arrow">↗</div>
+      </div>
     </div>
 
     <div class="axiom-bar" style="border-left-color:rgba(255,230,0,0.3);color:rgba(255,230,0,0.4);background:rgba(255,230,0,0.02)">
@@ -2250,6 +2268,28 @@ const DOMAINS = {
       { name: 'Unit Economics', tagline: 'Scale amplifies your margin structure — for better or worse.', body: 'Unit economics describes the revenues and costs associated with a single business unit. A company with negative unit economics loses more money with every sale — scale makes it worse, not better. Sustainable businesses have positive contribution margin before scaling, not after.', signal: 'Signal: Growth is only valuable when the underlying unit is profitable. Otherwise, you\'re just accelerating the loss.' },
       { name: 'The Pivot', tagline: 'Pivoting is not failure — staying on a dead hypothesis is.', body: 'A pivot is a structured course correction that preserves what has been learned while changing the strategy. The hardest part is distinguishing between "we need more time on this hypothesis" and "this hypothesis is wrong." Founders who pivot too late run out of runway. Those who pivot too early never test deeply enough.', signal: 'Signal: Define in advance what would prove your core hypothesis wrong. Then watch for those signals.' },
       { name: 'Competitive Moats', tagline: 'Advantages erode unless they are structural.', body: 'A moat is a durable competitive advantage that protects a business from competitors. Network effects, switching costs, proprietary data, and economies of scale are structural moats. First-mover advantage, brand, and superior execution are not — they are leaderships that can be closed. Only structural moats compound over time.', signal: 'Signal: Ask not "why are we winning now?" but "what makes it structurally harder to beat us next year than this year?"' }
+    ]
+  },
+  predicting: {
+    label: 'Predicting', sub: 'Forecasting · Worldview',
+    badge: '// Interface 09 — Predicting', accent: '#84cc16',
+    description: 'forecasting, prediction, calibration, worldview, base rates, reference class forecasting, superforecasting, updating beliefs, outside view vs inside view, overconfidence, scenario planning, measuring prediction accuracy',
+    concepts: [
+      { name: 'Calibration', tagline: 'Your confidence should match your accuracy rate.', body: 'A well-calibrated forecaster who says "I\'m 70% confident" is right about 70% of the time — not 100%, not 50%. Most people are overconfident: they say 90% and are right 60% of the time. Calibration is a trainable skill. Keeping a prediction log and tracking outcomes is how it improves.', signal: 'Signal: Track your predictions. The gap between your stated confidence and your actual accuracy is your calibration error.' },
+      { name: 'Base Rates', tagline: 'Most things are less unique than they feel from the inside.', body: 'The outside view asks: what happens to most people in situations like this? The inside view focuses on the specific details of your situation. Most forecasting errors come from ignoring base rates and over-indexing on the unique aspects of the current situation. Your startup is special — but most startups still fail.', signal: 'Signal: Before making a prediction, ask: what\'s the base rate for situations like this? Then adjust from there.' },
+      { name: 'Belief Updating', tagline: 'New evidence should move your estimate — by how much depends on the evidence.', body: 'Bayesian thinking means starting with a prior belief and revising it proportionally as new evidence arrives. Weak evidence should move you a little. Strong evidence should move you a lot. Most people either refuse to update at all (anchoring) or update too dramatically (overreacting to single data points).', signal: 'Signal: Ask not "was I right or wrong?" but "did I update my beliefs in proportion to the evidence I received?"' },
+      { name: 'Reference Class Forecasting', tagline: 'Find the right comparison group before making any prediction.', body: 'Reference class forecasting asks: what category does this belong to, and what is the historical distribution of outcomes in that category? Projects almost always take longer than planned — because planners ignore the reference class of similar projects. Picking the right reference class is the hardest and most valuable forecasting skill.', signal: 'Signal: Before estimating time, cost, or probability, ask: what reference class does this belong to? What happened to others in that class?' }
+    ]
+  },
+  probability: {
+    label: 'Probability', sub: 'Probabilistic Thinking',
+    badge: '// Interface 10 — Probability', accent: '#38bdf8',
+    description: 'probability, probabilistic thinking, expected value, confidence intervals, frequency estimation, combining forecasts, uncertainty quantification, conditional probability, false positives, statistical reasoning, thinking in bets',
+    concepts: [
+      { name: 'Expected Value', tagline: 'Multiply the probability by the outcome — then decide.', body: 'Expected value is probability multiplied by outcome magnitude. A 10% chance of $1,000 has an expected value of $100. Most people evaluate options by their best-case outcome or their most likely outcome — both are wrong. Expected value forces you to weight outcomes by how likely they actually are.', signal: 'Signal: Before any significant decision, estimate both the probability and the magnitude of each outcome. Multiply. Then compare.' },
+      { name: 'Confidence Intervals', tagline: 'Single-point estimates are almost always wrong — ranges are more honest.', body: 'A confidence interval expresses uncertainty as a range. "This will cost between $8,000 and $15,000" is more honest than "$10,000." Most people give single-point estimates because ranges feel indecisive. But a range that captures the true answer 90% of the time is more useful than a precise answer that\'s wrong 70% of the time.', signal: 'Signal: Replace single-point estimates with ranges. If you can\'t tolerate the worst end of your range, you\'re not actually prepared.' },
+      { name: 'Frequency vs Probability', tagline: 'Thinking in frequencies reduces cognitive errors.', body: 'Research shows people reason more accurately about probability when it\'s expressed as frequencies rather than percentages. "3 out of 100" triggers better intuition than "3%." When evaluating risk — medical, financial, social — translating percentages into concrete counts dramatically reduces reasoning errors.', signal: 'Signal: Translate "3% chance" into "3 out of every 100 situations like this." Frequencies are easier to reason about than percentages.' },
+      { name: 'Combining Forecasts', tagline: 'Averaging independent estimates almost always beats any single estimate.', body: 'The wisdom of crowds effect shows that aggregating multiple independent forecasts outperforms individual experts most of the time. This works because errors are random across forecasters but average toward zero. When you have access to multiple estimates, average them — even if some seem obviously wrong — before discarding any.', signal: 'Signal: Before trusting any single forecast, ask: what do independent estimates say? The average of several is almost always more accurate than any one.' }
     ]
   }
 };
