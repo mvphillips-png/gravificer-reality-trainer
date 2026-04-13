@@ -2050,7 +2050,7 @@ Rules:
 - Each scenario presents a real-world situation (not a textbook definition question)
 - 4 answer choices per scenario
 - Exactly one mechanistically correct answer
-- CRITICAL: Distribute correct answers randomly across positions A, B, C, and D. Do NOT place the correct answer in the same position repeatedly. Across 9 scenarios, spread correct answers across all four positions — some A, some B, some C, some D. Vary them deliberately.
+- CRITICAL: Distribute correct answers randomly across positions A, B, C, and D. Do NOT cluster correct answers in the same position. Across all 3 scenarios, use different positions — deliberately vary A, B, C, D.
 - Wrong answers are plausible but reveal a misreading of the interface
 - Feedback explains the mechanism at a systems level — not just what is correct but why
 - Each scenario tests a different core concept within the domain
@@ -2285,24 +2285,13 @@ async function showResults() {
   const readConcepts = sessionResults.filter(r => r.correct).map(r => r.concept).join(', ');
   const prevScores = history.slice(1, 4).map(h => `${h.score}/${h.total}`).join(', ');
 
-  const insightPrompt = `You are Gravificer — a precision learning system generating a personalized insight report after a training session.
+  const insightPrompt = `You are a knowledgeable coach writing a 3-sentence insight after a learning session.
 
-Domain tested: ${d.label} (${d.description})
-Score: ${correct}/3 at ${currentDifficulty} difficulty
-Concepts read correctly: ${readConcepts || 'none'}
-Concepts missed: ${missedConcepts || 'none'}
-Previous session scores: ${prevScores || 'first session'}
-Current streak: ${streak} session${streak !== 1 ? 's' : ''}
+Domain: ${d.label} | Score: ${correct}/3 | Difficulty: ${currentDifficulty}
+Correct: ${readConcepts || 'none'} | Missed: ${missedConcepts || 'none'}
+${prevScores ? `Prior scores: ${prevScores}` : ''}
 
-Write a 3–4 sentence insight summary that:
-- Opens with genuine recognition of what they got right — name the specific concepts they read well
-- If they missed concepts, frame it as an opportunity: "this is where the next level of understanding lives" not as failure
-- Is warm, encouraging, and makes them want to come back for another session
-- Ends with one forward-looking signal or question that sparks curiosity about what they'll discover next time
-- Feels like a knowledgeable coach, not a judge
-- No headers, no bullet points — flowing prose only
-- Second person, conversational but precise
-- Never use the word "brutal" or make the person feel bad about what they missed`;
+Write 3 sentences only. Open by naming what they read well. If they missed something, frame it as where the next level lives. End with one forward-looking question. Warm coach tone, second person, no headers or lists.`;
 
   try {
     const r2 = await fetch('https://gravificer-proxy.mvphillips.workers.dev/', {
@@ -2613,7 +2602,7 @@ Respond ONLY with valid JSON, no preamble, no markdown:
     const res = await fetch('https://gravificer-proxy.mvphillips.workers.dev/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 2500, messages: [{ role: 'user', content: prompt }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1200, messages: [{ role: 'user', content: prompt }] })
     });
     const data = await res.json();
     const text = data.content.map(i => i.text || '').join('');
@@ -2738,20 +2727,12 @@ async function deShowDebrief() {
   // Generate style debrief via Claude
   const styleEl = document.getElementById('de-style-text');
   const choicesSummary = deSessionDecisions.map((d, i) => `Decision ${i+1} (${d.context}): Chose "${d.choiceText}"`).join('\n');
-  const stylePrompt = `You are a warm, insightful decision-making coach generating a personalized debrief after a practice session.
+  const stylePrompt = `You are a warm coach writing a 3-sentence decision style debrief.
 
-Category: ${sub.name} (${sub.topic})
-Choices made:
-${choicesSummary}
+Category: ${sub.name}
+Choices: ${choicesSummary}
 
-Write a 3–4 sentence personal decision style debrief that:
-- Identifies what the pattern of choices reveals about this person's decision-making style in this category
-- Names their apparent priorities and values based on what they chose
-- Is warm, curious, and encouraging — it should make them feel understood, not judged
-- Ends with one insight or question that invites them to reflect further
-- Feels like it comes from a thoughtful coach who genuinely finds them interesting
-- No headers, no lists — flowing, conversational prose
-- Second person`;
+Write 3 sentences only. Name the pattern in their choices and what it reveals about their priorities. Make them feel understood. End with one reflective question. Conversational, second person, no headers.`;
 
   try {
     const r = await fetch('https://gravificer-proxy.mvphillips.workers.dev/', {
