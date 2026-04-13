@@ -1986,7 +1986,7 @@
   <div class="rf-header-wrap">
     <div class="de-eyebrow">// Decision Engine · Category 13</div>
     <h2 class="rf-title">Rapid Fire</h2>
-    <p class="rf-intro">Build your decision-making speed. 9 questions drawn from all 12 categories. Pick your timer, go fast, keep score. No overthinking — that's the point.</p>
+    <p class="rf-intro">Train your instincts. Real-life situations. Fast choices. No overthinking — that's the point.</p>
   </div>
 
   <!-- RF HOME -->
@@ -2648,77 +2648,129 @@ Write 3 sentences only. Open by naming what they read well. If they missed somet
 // ══════════════════════════════════════════════
 
 const RF_QUESTIONS = [
-  // STAY ALIVE
-  {cat:'Stay Alive',q:'You slept 4 hours. You have a full day ahead. First move?',choices:['Power through on caffeine','Cancel everything and sleep','Prioritize only essential tasks','Take a 20-min nap now'],correct:3},
-  {cat:'Stay Alive',q:'You feel chest tightness during a workout. You:',choices:['Push harder — no pain no gain','Stop immediately and rest','Slow down and monitor it','Ignore it, probably nothing'],correct:1},
-  {cat:'Stay Alive',q:'You haven\'t eaten in 8 hours and have a big decision to make. You:',choices:['Decide now while focused','Eat first, then decide','Delay the decision indefinitely','Ask someone else to decide'],correct:1},
-  {cat:'Stay Alive',q:'Your environment is consistently stressful. The highest-leverage change is:',choices:['Better stress management techniques','Change the environment','Work harder to adapt','Accept it as normal'],correct:1},
+  // STAY ALIVE (9)
+  {cat:'Stay Alive',q:'You slept 4 hours. Big day ahead. First move?',choices:['Power through on caffeine','Cancel everything and sleep','Prioritize only essentials','Take a 20-min nap now'],correct:3},
+  {cat:'Stay Alive',q:'Chest tightness during a workout. You:',choices:['Push harder — no pain no gain','Stop immediately','Slow down and monitor','Ignore it, probably nothing'],correct:1},
+  {cat:'Stay Alive',q:'Haven\'t eaten in 8 hours, big decision to make. You:',choices:['Decide now while sharp','Eat first, then decide','Delay the decision','Ask someone else'],correct:1},
+  {cat:'Stay Alive',q:'Your environment is chronically stressful. Highest-leverage fix?',choices:['Better coping techniques','Change the environment','Work harder to adapt','Accept it as normal'],correct:1},
+  {cat:'Stay Alive',q:'You\'re getting sick. Best immediate decision?',choices:['Push through — stay productive','Rest immediately and recover faster','Take medication and keep working','Wait and see if it gets worse'],correct:1},
+  {cat:'Stay Alive',q:'You haven\'t moved your body in 3 days. What\'s actually happening?',choices:['Normal — rest is good','Energy is declining whether you feel it or not','Your body is recovering','You\'re probably fine'],correct:1},
+  {cat:'Stay Alive',q:'You\'re running on adrenaline to meet a deadline. After it\'s done, you should:',choices:['Immediately start the next project','Deliberately recover before the next push','Celebrate by staying up late','Jump back in while momentum is high'],correct:1},
+  {cat:'Stay Alive',q:'Your sleep schedule is inconsistent. The highest cost is:',choices:['Feeling tired','Cognitive performance and decision quality','Physical appearance','Social life'],correct:1},
+  {cat:'Stay Alive',q:'You feel fine but haven\'t had a checkup in years. The real reason you\'re avoiding it is probably:',choices:['It\'s expensive','Fear of finding something wrong','You\'re too busy','Doctors aren\'t necessary when healthy'],correct:1},
 
-  // FEEL BETTER
-  {cat:'Feel Better',q:'You\'re furious at a coworker in a meeting. Best immediate response?',choices:['Express your frustration clearly','Pause and breathe before speaking','Leave the meeting','Say nothing and seethe'],correct:1},
-  {cat:'Feel Better',q:'You\'re overwhelmed. Most effective 5-minute reset?',choices:['Check your phone','Step outside and walk','Make a to-do list','Call a friend to vent'],correct:1},
+  // FEEL BETTER (9)
+  {cat:'Feel Better',q:'Furious at a coworker in a meeting. Best immediate move?',choices:['Express frustration clearly','Pause and breathe first','Leave the meeting','Say nothing and seethe'],correct:1},
+  {cat:'Feel Better',q:'Overwhelmed. Most effective 5-minute reset?',choices:['Check your phone','Step outside and walk','Make a to-do list','Call a friend'],correct:1},
   {cat:'Feel Better',q:'Someone criticizes your work publicly. You:',choices:['Defend yourself immediately','Thank them and assess later','Ignore it completely','Apologize reflexively'],correct:1},
-  {cat:'Feel Better',q:'You wake up anxious about nothing specific. Best first action?',choices:['Distract yourself immediately','Identify what\'s actually worrying you','Go back to sleep','Check your phone for news'],correct:1},
+  {cat:'Feel Better',q:'Wake up anxious about nothing specific. Best first action?',choices:['Distract yourself','Identify what\'s actually worrying you','Go back to sleep','Check the news'],correct:1},
+  {cat:'Feel Better',q:'You\'re holding a grudge. Who does it cost the most?',choices:['The other person','You','Both equally','Neither — it\'s just awareness'],correct:1},
+  {cat:'Feel Better',q:'You feel resentful about something. The useful question is:',choices:['Who caused this?','What boundary did I fail to set?','How do I get even?','Should I tell others?'],correct:1},
+  {cat:'Feel Better',q:'Someone\'s behavior is bothering you. Most effective first step?',choices:['Tell other people about it','Address it directly with them','Ignore it and move on','Analyze why they did it'],correct:1},
+  {cat:'Feel Better',q:'You\'re in a bad mood and can\'t shake it. The honest question is:',choices:['What\'s wrong with me?','What am I actually reacting to?','How do I fake being fine?','Who can I talk to?'],correct:1},
+  {cat:'Feel Better',q:'You feel drained after most social interactions. This tells you:',choices:['You\'re antisocial','You\'re introverted and need recovery time','Those people are wrong for you','You should socialize less'],correct:1},
 
-  // FOCUS CLEARLY
-  {cat:'Focus Clearly',q:'You have 3 urgent tasks and 2 hours. You:',choices:['Do all three partially','Pick the highest-impact one first','Do the easiest one first','Ask your boss to prioritize'],correct:1},
-  {cat:'Focus Clearly',q:'Your phone keeps distracting you during deep work. You:',choices:['Try harder to resist it','Put it in another room','Turn on do not disturb','Check it every 10 minutes as reward'],correct:1},
-  {cat:'Focus Clearly',q:'You\'ve been context-switching all day. Best recovery?',choices:['Keep going — you\'re in the zone','Block uninterrupted time tomorrow','Work later into the night','Multitask more efficiently'],correct:1},
-  {cat:'Focus Clearly',q:'A new opportunity arrives while you\'re mid-project. You:',choices:['Drop the project and pursue it','Note it and finish the project','Do both simultaneously','Ignore it entirely'],correct:1},
+  // FOCUS CLEARLY (9)
+  {cat:'Focus Clearly',q:'3 urgent tasks, 2 hours. You:',choices:['Do all three partially','Pick the highest-impact one first','Do the easiest one first','Ask your boss to prioritize'],correct:1},
+  {cat:'Focus Clearly',q:'Phone keeps distracting you during deep work. You:',choices:['Try harder to resist','Put it in another room','Turn on do not disturb','Check it every 10 min as reward'],correct:1},
+  {cat:'Focus Clearly',q:'Context-switching all day. Best recovery?',choices:['Keep going — momentum','Block uninterrupted time tomorrow','Work later tonight','Multitask more efficiently'],correct:1},
+  {cat:'Focus Clearly',q:'New opportunity arrives mid-project. You:',choices:['Drop the project for it','Note it and finish the project','Do both simultaneously','Ignore it entirely'],correct:1},
+  {cat:'Focus Clearly',q:'You\'re productive but always busy. The real question is:',choices:['How do I get more done?','Am I busy on the right things?','How do I work faster?','Is my system efficient?'],correct:1},
+  {cat:'Focus Clearly',q:'Your to-do list has 30 items. The first move is:',choices:['Start at the top','Delete or defer at least half','Pick what\'s easiest','Find someone to delegate to'],correct:1},
+  {cat:'Focus Clearly',q:'You keep postponing the same task. The real reason is usually:',choices:['Laziness','Unclear next action or hidden fear','Lack of time','It\'s not important'],correct:1},
+  {cat:'Focus Clearly',q:'Your best thinking happens when?',choices:['Under pressure and deadline','During protected, undistracted time','In meetings with smart people','Late at night'],correct:1},
+  {cat:'Focus Clearly',q:'Saying yes to something new always means saying no to:',choices:['Nothing if you\'re efficient','Whatever would have occupied that time','Something less important','The things you don\'t enjoy'],correct:1},
 
-  // LEARN ACCURATELY
-  {cat:'Learn Accurately',q:'You read something that contradicts what you believe. You:',choices:['Dismiss it — your experience proves otherwise','Investigate whether it\'s credible','Share it immediately','Accept it as true'],correct:1},
-  {cat:'Learn Accurately',q:'You need to learn a new skill fast. Best approach?',choices:['Read everything about it first','Find an expert and ask specific questions','Watch tutorials for hours','Try and fail repeatedly'],correct:3},
-  {cat:'Learn Accurately',q:'You\'ve been doing something the same way for years. Someone suggests a better way. You:',choices:['Dismiss it — experience beats theory','Test it seriously before judging','Adopt it immediately','Ask why it\'s better before trying'],correct:3},
-  {cat:'Learn Accurately',q:'Which is harder to unlearn than to learn?',choices:['A new language','A wrong mental model','A physical skill','A new software tool'],correct:1},
+  // LEARN ACCURATELY (8)
+  {cat:'Learn Accurately',q:'You read something that contradicts your belief. You:',choices:['Dismiss it — experience wins','Investigate whether it\'s credible','Share it immediately','Accept it as true'],correct:1},
+  {cat:'Learn Accurately',q:'Need to learn a skill fast. Best approach?',choices:['Read everything about it','Ask an expert specific questions','Watch tutorials for hours','Try and fail repeatedly'],correct:3},
+  {cat:'Learn Accurately',q:'You\'ve done something the same way for years. Someone suggests better. You:',choices:['Dismiss it','Test it seriously first','Adopt it immediately','Ask why before trying'],correct:3},
+  {cat:'Learn Accurately',q:'The most reliable signal that you\'ve actually learned something is:',choices:['You can recall it','You can apply it in a new situation','You can explain it to others','You\'ve passed a test on it'],correct:1},
+  {cat:'Learn Accurately',q:'You\'re learning from someone who disagrees with you. The value is:',choices:['Limited — they\'re probably wrong','High — friction reveals your blind spots','Depends on their credentials','Only useful if you change your mind'],correct:1},
+  {cat:'Learn Accurately',q:'You feel certain about something. The useful next question is:',choices:['Who agrees with me?','What would change my mind?','How can I convince others?','How long have I believed this?'],correct:1},
+  {cat:'Learn Accurately',q:'Depth vs breadth in learning. When does depth win?',choices:['Always','When you\'re building expertise in a specific domain','When you have unlimited time','Never — breadth gives more options'],correct:1},
+  {cat:'Learn Accurately',q:'The hardest thing to learn isn\'t a new skill — it\'s:',choices:['A foreign language','Unlearning something wrong you believe is right','Advanced mathematics','A physical technique'],correct:1},
 
-  // CHOOSE WISELY
-  {cat:'Choose Wisely',q:'You\'re about to make a big decision. The most useful thing to do first is:',choices:['Trust your gut','List what you\'d need to prove yourself wrong','Ask friends what they\'d do','Sleep on it'],correct:1},
-  {cat:'Choose Wisely',q:'You\'ve invested 6 months in a project that\'s clearly not working. You:',choices:['Push harder — 6 months can\'t be wasted','Cut it and apply the learning elsewhere','Find someone to blame','Pivot without acknowledging the failure'],correct:1},
-  {cat:'Choose Wisely',q:'Two options: certain $50 gain OR 60% chance of $100. Which do you pick and why does it matter?',choices:['$50 — certainty is always better','$100 — expected value is higher','It depends on what the money is for','Flip a coin'],correct:2},
-  {cat:'Choose Wisely',q:'You feel urgency to decide right now. Most of the time this urgency is:',choices:['Real — timing matters','Manufactured — artificial pressure','Your instincts signaling danger','Unique to this situation'],correct:1},
+  // CHOOSE WISELY (9)
+  {cat:'Choose Wisely',q:'Big decision. Most useful first step?',choices:['Trust your gut','List what would prove you wrong','Ask friends what they\'d do','Sleep on it'],correct:1},
+  {cat:'Choose Wisely',q:'6 months into a project clearly not working. You:',choices:['Push harder — can\'t waste 6 months','Cut it and apply the learning','Find someone to blame','Pivot without acknowledging failure'],correct:1},
+  {cat:'Choose Wisely',q:'You feel urgency to decide right now. Most of the time this is:',choices:['Real — timing matters','Manufactured pressure','Your instincts','Unique to this situation'],correct:1},
+  {cat:'Choose Wisely',q:'You\'re making a decision for future-you. What does future-you need most?',choices:['What present-you wants','Fewer regrets over inaction than action','The comfortable choice','Speed'],correct:1},
+  {cat:'Choose Wisely',q:'You have two good options. The real question is:',choices:['Which is better?','Which am I more afraid to choose?','What would others do?','Which is safer?'],correct:1},
+  {cat:'Choose Wisely',q:'You keep revisiting a decision you already made. This usually means:',choices:['You made the wrong choice','You didn\'t commit — not that you chose wrong','You need more information','You should change course'],correct:1},
+  {cat:'Choose Wisely',q:'The decision you keep delaying is probably:',choices:['Not important enough to decide','The most important one on your list','Too complex to decide now','Waiting for the right information'],correct:1},
+  {cat:'Choose Wisely',q:'Regret minimization means asking:',choices:['What do I want now?','What will I wish I had done at 80?','What\'s the safest choice?','What do others think I should do?'],correct:1},
+  {cat:'Choose Wisely',q:'Two options, both risky. How do you choose?',choices:['Flip a coin','Compare the downside of each, not the upside','Pick the exciting one','Avoid both and wait'],correct:1},
 
-  // CONNECT SELECTIVELY
-  {cat:'Connect Selectively',q:'Someone repeatedly crosses your stated boundary. You:',choices:['State it more clearly one more time','Enforce a consequence','Accept it\'s who they are','Distance yourself without explanation'],correct:1},
-  {cat:'Connect Selectively',q:'A new relationship feels exciting but draining. This is:',choices:['Normal — all good things take energy','A sign worth paying attention to','Just initial adjustment','The price of connection'],correct:1},
-  {cat:'Connect Selectively',q:'Your inner circle mostly agrees with you on everything. This is:',choices:['A sign of deep alignment','A risk — you need friction to think clearly','Comfortable and fine','Proof you\'ve chosen well'],correct:1},
-  {cat:'Connect Selectively',q:'Trust is broken in an important relationship. First step?',choices:['Forgive and move on','Name what happened clearly','Give it time','Pretend it didn\'t happen'],correct:1},
+  // CONNECT SELECTIVELY (8)
+  {cat:'Connect Selectively',q:'Someone repeatedly crosses your stated boundary. You:',choices:['State it more clearly','Enforce a consequence','Accept who they are','Distance without explanation'],correct:1},
+  {cat:'Connect Selectively',q:'New relationship feels exciting but draining. This is:',choices:['Normal — all good things take energy','A signal worth noticing','Just initial adjustment','The price of connection'],correct:1},
+  {cat:'Connect Selectively',q:'Your inner circle agrees with you on everything. This is:',choices:['Deep alignment','A risk — you need friction to think clearly','Fine and comfortable','Proof you\'ve chosen well'],correct:1},
+  {cat:'Connect Selectively',q:'Trust is broken. First step?',choices:['Forgive and move on','Name what happened clearly','Give it time','Pretend it didn\'t happen'],correct:1},
+  {cat:'Connect Selectively',q:'You keep a relationship that consistently depletes you. Why?',choices:['Loyalty','Fear of the gap it would leave','Genuine love','Habit masquerading as commitment'],correct:3},
+  {cat:'Connect Selectively',q:'Someone asks for your honest feedback. You give:',choices:['Full truth regardless of feelings','Softened truth to protect the relationship','Positive only','What they want to hear'],correct:0},
+  {cat:'Connect Selectively',q:'You meet someone impressive. Best first move?',choices:['Impress them back','Ask questions and listen more than you speak','Share your credentials','Connect on LinkedIn immediately'],correct:1},
+  {cat:'Connect Selectively',q:'Forgiveness is most useful for:',choices:['The person who wronged you','You — it releases the weight you\'re carrying','The relationship','Moving on publicly'],correct:1},
 
-  // BUILD INTENTIONALLY
-  {cat:'Build Intentionally',q:'You have talent in two areas — one pays well, one matters to you. You:',choices:['Follow the money','Follow the meaning','Find where they overlap','Pick one and commit'],correct:2},
-  {cat:'Build Intentionally',q:'You\'re asked to take on more than you can do well. You:',choices:['Say yes and figure it out later','Decline clearly','Accept with conditions','Say yes to please them'],correct:1},
-  {cat:'Build Intentionally',q:'Your identity says "I\'m not the kind of person who..." This phrase is usually:',choices:['Accurate self-knowledge','A story limiting your options','Healthy boundary-setting','Permanent and fixed'],correct:1},
-  {cat:'Build Intentionally',q:'You want to build something new. The most dangerous first step is:',choices:['Starting before you\'re ready','Waiting until you have a perfect plan','Telling too many people too early','Starting small'],correct:1},
+  // BUILD INTENTIONALLY (8)
+  {cat:'Build Intentionally',q:'Talent in two areas — one pays well, one matters. You:',choices:['Follow the money','Follow the meaning','Find where they overlap','Pick one and commit'],correct:2},
+  {cat:'Build Intentionally',q:'Asked to take on more than you can do well. You:',choices:['Say yes and figure it out','Decline clearly','Accept with conditions','Say yes to please them'],correct:1},
+  {cat:'Build Intentionally',q:'"I\'m not the kind of person who..." is usually:',choices:['Accurate self-knowledge','A story limiting your options','Healthy boundary-setting','Permanent truth'],correct:1},
+  {cat:'Build Intentionally',q:'You want to start something new. Most dangerous first step?',choices:['Starting before ready','Waiting for a perfect plan','Telling too many people too early','Starting small'],correct:1},
+  {cat:'Build Intentionally',q:'Your career is drifting without direction. The honest cause is:',choices:['Bad luck','Absence of intentional choices','The economy','Others holding you back'],correct:1},
+  {cat:'Build Intentionally',q:'The gap between who you are and who you want to be is closed by:',choices:['Better goals','Daily decisions that align with who you\'re becoming','Motivation','Inspiration'],correct:1},
+  {cat:'Build Intentionally',q:'You keep saying you\'ll start when conditions are better. This is:',choices:['Wise patience','Resistance disguised as strategy','Good planning','Realistic assessment'],correct:1},
+  {cat:'Build Intentionally',q:'Which builds identity faster?',choices:['What you say about yourself','What you consistently do','What you believe','How others describe you'],correct:1},
 
-  // ALLOCATE RESOURCES
-  {cat:'Allocate Resources',q:'You get an unexpected $1000. The highest-leverage use is:',choices:['Spend it on something you\'ve wanted','Invest it','Pay down high-interest debt','Save it'],correct:2},
-  {cat:'Allocate Resources',q:'You\'re spending money on something that no longer serves you. The sunk cost is:',choices:['Reason to keep paying','Irrelevant to the next decision','A loss to grieve before moving on','Proof it was a mistake'],correct:1},
-  {cat:'Allocate Resources',q:'Time is more valuable than money because:',choices:['It sounds good to say','You can always make more money, never more time','Everyone has the same amount','Productivity gurus say so'],correct:1},
-  {cat:'Allocate Resources',q:'You\'re debating whether to hire help. The deciding factor should be:',choices:['Can I afford it?','Does it free me for higher-value work?','Is it embarrassing to need help?','What would others think?'],correct:1},
+  // ALLOCATE RESOURCES (8)
+  {cat:'Allocate Resources',q:'Unexpected $1000. Highest-leverage use?',choices:['Buy something you\'ve wanted','Invest it','Pay down high-interest debt','Save it'],correct:2},
+  {cat:'Allocate Resources',q:'Spending on something that no longer serves you. The sunk cost is:',choices:['Reason to keep paying','Irrelevant to the next decision','A loss to grieve first','Proof it was a mistake'],correct:1},
+  {cat:'Allocate Resources',q:'Time is more valuable than money because:',choices:['Sounds wise','You can earn more money — never more time','Everyone has the same amount','Productivity gurus say so'],correct:1},
+  {cat:'Allocate Resources',q:'Debating whether to hire help. Deciding factor?',choices:['Can I afford it?','Does it free me for higher-value work?','Is it embarrassing to need help?','What would others think?'],correct:1},
+  {cat:'Allocate Resources',q:'You\'re spending time on things you could pay someone else to do. The real cost is:',choices:['The money to hire someone','The higher-value things you\'re not doing','Nothing if you enjoy them','Depends on your income'],correct:1},
+  {cat:'Allocate Resources',q:'You earn more but aren\'t building wealth. The leak is usually:',choices:['Taxes','Lifestyle inflation matching income growth','Bad investments','Not earning enough yet'],correct:1},
+  {cat:'Allocate Resources',q:'The best investment for most people in their 20s and 30s is:',choices:['Real estate','Stocks','Skills and earning capacity','Crypto'],correct:2},
+  {cat:'Allocate Resources',q:'You\'re about to spend money to avoid discomfort. Pause. What are you actually buying?',choices:['Convenience','Temporary relief from something worth facing','Value','Efficiency'],correct:1},
 
-  // MANAGE RISK
-  {cat:'Manage Risk',q:'You\'re in an environment that consistently brings out the worst in you. The solution is:',choices:['Try harder to resist the environment','Change the environment','Build more willpower','Meditate more'],correct:1},
-  {cat:'Manage Risk',q:'A small bet can teach you something. A large bet can:',choices:['Teach you more','Teach you nothing if it wipes you out','Only be justified by big rewards','Always be recovered from'],correct:1},
-  {cat:'Manage Risk',q:'You\'ve been persisting on something for a long time with no results. The question is:',choices:['How much longer should I persist?','Am I persisting on the right thing?','Who can I blame for the results?','How do I work harder?'],correct:1},
-  {cat:'Manage Risk',q:'Your gut says stop. Your ego says continue. Which do you trust?',choices:['Always the gut','Always reason over emotion','Neither — find more data','It depends on the stakes'],correct:3},
+  // MANAGE RISK (8)
+  {cat:'Manage Risk',q:'Environment consistently brings out the worst in you. Solution?',choices:['Try harder to resist','Change the environment','Build more willpower','Meditate more'],correct:1},
+  {cat:'Manage Risk',q:'A small bet can teach you. A large bet can:',choices:['Teach you more','Teach you nothing if it wipes you out','Only be justified by big rewards','Always be recovered from'],correct:1},
+  {cat:'Manage Risk',q:'Persisting long-term with no results. The real question is:',choices:['How much longer?','Am I persisting on the right thing?','Who\'s responsible?','How do I work harder?'],correct:1},
+  {cat:'Manage Risk',q:'Gut says stop. Ego says continue. You trust:',choices:['Always the gut','Always reason','Neither — get more data','Depends on the stakes'],correct:3},
+  {cat:'Manage Risk',q:'You\'re about to take a risk. The most important thing to know is:',choices:['The upside','Whether you can survive the downside','What others would do','The probability of success'],correct:1},
+  {cat:'Manage Risk',q:'The most dangerous risk is:',choices:['A big visible one you\'re aware of','The slow invisible one you\'ve normalized','A financial one','A relationship one'],correct:1},
+  {cat:'Manage Risk',q:'You failed at something. Most useful question afterward?',choices:['Who caused this?','What would I do differently?','How do I avoid this pain again?','Was it worth trying?'],correct:1},
+  {cat:'Manage Risk',q:'Your comfort zone is:',choices:['Where you should stay — safety matters','Where you should never be','Useful rest, but growth lives just outside it','A myth'],correct:2},
 
-  // ACT ETHICALLY
-  {cat:'Act Ethically',q:'You notice something unfair happening to someone else. Easiest thing to do?',choices:['Speak up','Do nothing — not your problem','Report it anonymously','Ask others what they think'],correct:1},
-  {cat:'Act Ethically',q:'You can gain an advantage by bending a rule slightly. You:',choices:['Take it — everyone does it','Decline — the rule exists for a reason','Negotiate the rule openly','Ask if anyone would notice'],correct:1},
-  {cat:'Act Ethically',q:'Honesty has a real cost in this situation. You:',choices:['Choose comfort — it\'s a small lie','Pay the cost and be honest','Find a way to be technically truthful','Delay until it resolves itself'],correct:1},
-  {cat:'Act Ethically',q:'The right thing and the easy thing are different. How often should you choose the right thing?',choices:['When convenient','When others are watching','Always, if you\'re serious about it','When the stakes are high enough'],correct:2},
+  // ACT ETHICALLY (8)
+  {cat:'Act Ethically',q:'Something unfair is happening to someone else. Easiest response?',choices:['Speak up','Do nothing','Report anonymously','Ask others what to do'],correct:1},
+  {cat:'Act Ethically',q:'You can gain an advantage by bending a rule slightly. You:',choices:['Take it — everyone does','Decline — rules exist for reasons','Negotiate the rule openly','Check if anyone would notice'],correct:1},
+  {cat:'Act Ethically',q:'Honesty has a real cost here. You:',choices:['Choose comfort — small lie','Pay the cost and be honest','Find a technically-true version','Delay until it resolves'],correct:1},
+  {cat:'Act Ethically',q:'Right thing vs easy thing differ. How often do you choose right?',choices:['When convenient','When others are watching','Always, if you\'re serious','When stakes are high enough'],correct:2},
+  {cat:'Act Ethically',q:'You made a mistake that hurt someone. First move?',choices:['Minimize it','Acknowledge it fully and without excuses','Explain why it happened','Fix it quietly without mentioning it'],correct:1},
+  {cat:'Act Ethically',q:'Someone shares information with you in confidence. They\'re doing something harmful. You:',choices:['Keep the confidence — always','Break confidence to prevent harm','Do nothing','Ask them to stop'],correct:1},
+  {cat:'Act Ethically',q:'The test of your ethics is:',choices:['What you believe','What you do when it costs you something','How you treat people publicly','What you say when asked'],correct:1},
+  {cat:'Act Ethically',q:'You see credit being given to the wrong person for your work. You:',choices:['Say nothing — not worth it','Correct the record clearly and calmly','Complain to others','Let it go this time'],correct:1},
 
-  // ADAPT OVER TIME
-  {cat:'Adapt Over Time',q:'Your old approach isn\'t working anymore. The problem is probably:',choices:['You need more discipline','The environment changed — your approach needs to','You\'re not working hard enough','The approach was never right'],correct:1},
-  {cat:'Adapt Over Time',q:'You\'ve changed your mind on something important. This is:',choices:['A sign of weakness','Evidence you\'re thinking clearly','Proof you were wrong before','Confusing to others'],correct:1},
-  {cat:'Adapt Over Time',q:'Letting go of a past identity is hard because:',choices:['It makes you lose yourself','Identity is stored in habits and relationships, not just thoughts','You might regret it','Others defined you by it'],correct:1},
-  {cat:'Adapt Over Time',q:'Consistency vs flexibility — when does consistency become rigidity?',choices:['When others tell you so','When it stops producing results','After 10 years','When you feel stuck'],correct:1},
+  // ADAPT OVER TIME (8)
+  {cat:'Adapt Over Time',q:'Old approach isn\'t working. Problem is probably:',choices:['Need more discipline','Environment changed — approach must too','Not working hard enough','Wrong approach from the start'],correct:1},
+  {cat:'Adapt Over Time',q:'You\'ve changed your mind on something important. This is:',choices:['Weakness','Evidence you\'re thinking clearly','Proof you were wrong before','Confusing to others'],correct:1},
+  {cat:'Adapt Over Time',q:'Letting go of a past identity is hard because:',choices:['It loses your history','Identity lives in habits and relationships, not just thoughts','You might regret it','Others defined you by it'],correct:1},
+  {cat:'Adapt Over Time',q:'Consistency becomes rigidity when:',choices:['Others tell you so','It stops producing results','After 10 years','You feel stuck'],correct:1},
+  {cat:'Adapt Over Time',q:'The version of you from 5 years ago would be:',choices:['The same as now','Surprised by who you\'ve become','Better in some ways','Irrelevant to compare'],correct:1},
+  {cat:'Adapt Over Time',q:'You resist changing a belief even when faced with good evidence. This is called:',choices:['Strong conviction','Cognitive dissonance — discomfort from conflicting information','Wisdom from experience','Healthy skepticism'],correct:1},
+  {cat:'Adapt Over Time',q:'The skill that compounds most over time is:',choices:['A technical skill','The ability to learn and adapt faster than circumstances change','Networking','Specialized expertise'],correct:1},
+  {cat:'Adapt Over Time',q:'You\'re the same person you were 3 years ago. This is:',choices:['Stable — consistency is good','Worth examining — growth requires change','A sign of integrity','Normal'],correct:1},
 
-  // DEFINE MEANING
-  {cat:'Define Meaning',q:'You achieved a big goal and felt... empty. This means:',choices:['You need a bigger goal','The goal wasn\'t connected to what actually matters to you','Goals don\'t bring fulfillment','You need to celebrate harder'],correct:1},
-  {cat:'Define Meaning',q:'Legacy is built primarily through:',choices:['What you say','The consistent choices you make over time','Major one-time acts','How you\'re remembered after you\'re gone'],correct:1},
-  {cat:'Define Meaning',q:'If your life ended tomorrow, what would you regret most?',choices:['Things you did','Things you didn\'t do','Things others did to you','Things you said'],correct:1},
-  {cat:'Define Meaning',q:'The clearest signal that something matters to you is:',choices:['You think about it often','You act on it consistently even at a cost','You tell others about it','You feel passionate when discussing it'],correct:1},
+  // DEFINE MEANING (8)
+  {cat:'Define Meaning',q:'Achieved a big goal and felt empty. This means:',choices:['Need a bigger goal','Goal wasn\'t connected to what actually matters','Goals don\'t bring fulfillment','Need to celebrate harder'],correct:1},
+  {cat:'Define Meaning',q:'Legacy is built primarily through:',choices:['What you say','Consistent choices made over time','Major one-time acts','How you\'re remembered'],correct:1},
+  {cat:'Define Meaning',q:'If your life ended tomorrow, what would you regret most?',choices:['Things you did','Things you didn\'t do','Things others did','Things you said'],correct:1},
+  {cat:'Define Meaning',q:'The clearest signal something matters to you is:',choices:['You think about it often','You act on it consistently even at a cost','You tell others about it','You feel passionate discussing it'],correct:1},
+  {cat:'Define Meaning',q:'A meaningful life and a comfortable life are:',choices:['The same thing','Often in tension — meaning requires challenge','Only possible with money','The goal of everyone'],correct:1},
+  {cat:'Define Meaning',q:'Your values are best revealed by:',choices:['What you say they are','Where your time and money actually go','What you aspire to','How you describe yourself'],correct:1},
+  {cat:'Define Meaning',q:'You\'re doing work that pays well but feels meaningless. The cost is:',choices:['Nothing if the money is good','Gradual erosion of energy and identity','Something to deal with later','Unavoidable in a career'],correct:1},
+  {cat:'Define Meaning',q:'The most important question you can ask about how you spend your time:',choices:['Am I being productive?','Am I doing what I said matters to me?','Am I ahead of others?','Am I satisfied?'],correct:1},
 ];
 
 let rfTimer = 5;
@@ -2730,6 +2782,7 @@ let rfScore = 0;
 let rfStreak = 0;
 let rfBestStreak = 0;
 let rfMissed = [];
+const RF_ROUND_SIZE = 10;
 
 function rfSetTimer(t, btn) {
   rfTimer = t;
@@ -2751,7 +2804,7 @@ function rfLoadStats() {
     const played = parseInt(localStorage.getItem('rf_games_played') || '0');
     if (played > 0) {
       document.getElementById('rf-stats-row').style.display = 'flex';
-      document.getElementById('rf-best-score').textContent = `${best}/9`;
+      document.getElementById('rf-best-score').textContent = `${best}/${RF_ROUND_SIZE}`;
       document.getElementById('rf-best-streak').textContent = bestStreak;
       document.getElementById('rf-games-played').textContent = played;
     }
@@ -2761,16 +2814,16 @@ function rfLoadStats() {
 function rfStart() {
   clearInterval(rfTimerInterval);
   rfScore = 0; rfStreak = 0; rfBestStreak = 0; rfCurrentQ = 0; rfMissed = [];
-  rfRoundQuestions = [...RF_QUESTIONS].sort(() => Math.random() - 0.5).slice(0, 9);
+  rfRoundQuestions = [...RF_QUESTIONS].sort(() => Math.random() - 0.5).slice(0, RF_ROUND_SIZE);
   document.querySelectorAll('.rf-screen').forEach(s => s.classList.remove('active'));
   document.getElementById('rf-game').classList.add('active');
   rfLoadQuestion();
 }
 
 function rfLoadQuestion() {
-  if (rfCurrentQ >= 9) { rfEndRound(); return; }
+  if (rfCurrentQ >= RF_ROUND_SIZE) { rfEndRound(); return; }
   const q = rfRoundQuestions[rfCurrentQ];
-  document.getElementById('rf-q-counter').textContent = `${rfCurrentQ + 1} / 9`;
+  document.getElementById('rf-q-counter').textContent = `${rfCurrentQ + 1} / ${RF_ROUND_SIZE}`;
   document.getElementById('rf-score-live').textContent = rfScore;
   document.getElementById('rf-streak-live').textContent = rfStreak > 1 ? `🔥 ${rfStreak}` : '';
   document.getElementById('rf-category-tag').textContent = `// ${q.cat}`;
@@ -2788,7 +2841,6 @@ function rfLoadQuestion() {
     choicesEl.appendChild(btn);
   });
 
-  // Timer
   const bar = document.getElementById('rf-timer-bar');
   bar.style.transition = 'none';
   bar.style.width = '100%';
@@ -2804,10 +2856,7 @@ function rfLoadQuestion() {
   rfTimerInterval = setInterval(() => {
     elapsed += 0.1;
     if (elapsed >= rfTimer * 0.6) bar.classList.add('urgent');
-    if (elapsed >= rfTimer) {
-      clearInterval(rfTimerInterval);
-      rfTimeout();
-    }
+    if (elapsed >= rfTimer) { clearInterval(rfTimerInterval); rfTimeout(); }
   }, 100);
 }
 
@@ -2834,14 +2883,14 @@ function rfAnswer(chosen) {
     rfMissed.push({ q: q.q, answer: q.choices[q.correct] });
     rfStreak = 0;
     resultEl.className = 'rf-result wrong';
-    resultEl.textContent = `✗ The stronger answer: ${letters[q.correct]}. ${q.choices[q.correct]}`;
+    resultEl.textContent = `✗ Stronger answer: ${letters[q.correct]}. ${q.choices[q.correct]}`;
   }
   resultEl.style.display = 'block';
   document.getElementById('rf-score-live').textContent = rfScore;
   document.getElementById('rf-streak-live').textContent = rfStreak > 1 ? `🔥 ${rfStreak}` : '';
 
   rfCurrentQ++;
-  setTimeout(rfLoadQuestion, isCorrect ? 900 : 1600);
+  setTimeout(rfLoadQuestion, isCorrect ? 800 : 1500);
 }
 
 function rfTimeout() {
@@ -2868,8 +2917,6 @@ function rfTimeout() {
 
 function rfEndRound() {
   clearInterval(rfTimerInterval);
-
-  // Save stats
   try {
     const prevBest = parseInt(localStorage.getItem('rf_best_score') || '0');
     const prevStreak = parseInt(localStorage.getItem('rf_best_streak') || '0');
@@ -2883,32 +2930,27 @@ function rfEndRound() {
   document.getElementById('rf-results').classList.add('active');
 
   const scoreEl = document.getElementById('rf-final-score');
-  scoreEl.textContent = `${rfScore} / 9`;
-  scoreEl.style.color = rfScore >= 7 ? 'var(--green)' : rfScore >= 5 ? 'var(--amber)' : 'var(--magenta)';
-
+  scoreEl.textContent = `${rfScore} / ${RF_ROUND_SIZE}`;
+  scoreEl.style.color = rfScore >= 8 ? 'var(--green)' : rfScore >= 6 ? 'var(--amber)' : 'var(--magenta)';
   document.getElementById('rf-final-streak').textContent = rfBestStreak > 1 ? `Best streak this round: ${rfBestStreak}` : '';
 
-  const messages = [
-    [7, ['Sharp. Your instincts are calibrated.', 'Fast and accurate — that\'s the combination.', 'You\'re reading situations quickly and correctly.']],
-    [5, ['Solid foundation. A few blind spots worth noting.', 'Good speed, some hesitation on the harder calls.', 'More right than wrong — keep building.']],
-    [0, ['Speed takes practice. The pattern is more important than the score.', 'Decision muscle builds with repetition. Go again.', 'Every miss is a data point. Notice the pattern.']]
-  ];
-  let msg = messages[2][1][Math.floor(Math.random() * 3)];
-  for (const [min, opts] of messages) { if (rfScore >= min) { msg = opts[Math.floor(Math.random() * 3)]; break; } }
-  document.getElementById('rf-result-message').textContent = msg;
+  const msgs = {
+    high: ['Sharp. Your instincts are well-calibrated.','Fast and accurate — that\'s the combination.','You\'re reading situations quickly and correctly.'],
+    mid: ['Solid foundation. A few blind spots worth noting.','Good instincts, some hesitation on the harder calls.','More right than wrong — keep building the muscle.'],
+    low: ['Speed builds with repetition. Go again.','Every miss is a data point. Notice the pattern.','Decision muscle grows with practice. Play again.']
+  };
+  const tier = rfScore >= 8 ? 'high' : rfScore >= 6 ? 'mid' : 'low';
+  document.getElementById('rf-result-message').textContent = msgs[tier][Math.floor(Math.random() * 3)];
 
   const missedWrap = document.getElementById('rf-missed-wrap');
-  const missedList = document.getElementById('rf-missed-list');
   if (rfMissed.length > 0) {
     missedWrap.style.display = 'block';
-    missedList.innerHTML = rfMissed.map(m => `
+    document.getElementById('rf-missed-list').innerHTML = rfMissed.map(m => `
       <div class="rf-missed-item">
         <div class="rf-missed-q">${m.q}</div>
         <div class="rf-missed-answer">→ ${m.answer}</div>
       </div>`).join('');
-  } else {
-    missedWrap.style.display = 'none';
-  }
+  } else { missedWrap.style.display = 'none'; }
 }
 
 rfLoadStats();
