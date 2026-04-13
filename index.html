@@ -1474,6 +1474,270 @@
   .de-recap-decision { color: var(--text-dim); line-height: 1.5; }
   .de-recap-choice { color: var(--text); font-weight: 600; margin-top: 0.2rem; font-size: 0.8rem; }
 
+  /* ══ RAPID FIRE ══ */
+  #rapid-fire-section { margin-bottom: 3rem; }
+
+  .rf-header-wrap {
+    border-top: 1px solid var(--border-dim);
+    padding-top: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .rf-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--magenta);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 0 0 24px rgba(255,0,60,0.3);
+    margin-bottom: 0.4rem;
+    line-height: 1.15;
+  }
+
+  .rf-intro {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.75;
+    max-width: 580px;
+    margin-bottom: 2rem;
+  }
+
+  .rf-screen { display: none; }
+  .rf-screen.active { display: block; animation: fadeIn 0.3s ease both; }
+
+  .rf-timer-pick { margin-bottom: 1.5rem; }
+
+  .rf-timer-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--text-faint);
+    letter-spacing: 0.14em;
+    margin-bottom: 0.75rem;
+  }
+
+  .rf-timer-btns { display: flex; gap: 0.6rem; }
+
+  .rf-timer-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--border-dim);
+    border-radius: 20px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--text-faint);
+    transition: all 0.2s;
+  }
+
+  .rf-timer-btn:hover { border-color: var(--magenta); color: var(--magenta); }
+  .rf-timer-btn.active { border-color: var(--magenta); color: var(--magenta); background: rgba(255,0,60,0.08); }
+
+  .rf-stats-row {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.2rem;
+    background: var(--bg2);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius);
+  }
+
+  .rf-stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .rf-stat-num { font-family: 'Orbitron', monospace; font-size: 1.3rem; color: var(--magenta); }
+  .rf-stat-label { font-family: 'Share Tech Mono', monospace; font-size: 0.6rem; color: var(--text-faint); letter-spacing: 0.1em; }
+
+  .rf-start-btn {
+    font-family: 'Orbitron', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 2px solid var(--magenta);
+    border-radius: 30px;
+    padding: 0.9rem 2.5rem;
+    cursor: pointer;
+    background: rgba(255,0,60,0.08);
+    color: var(--magenta);
+    transition: all 0.2s;
+    box-shadow: 0 0 20px rgba(255,0,60,0.15);
+  }
+
+  .rf-start-btn:hover { background: rgba(255,0,60,0.18); box-shadow: 0 0 30px rgba(255,0,60,0.3); transform: translateY(-1px); }
+  .rf-start-btn:active { transform: scale(0.98); }
+
+  /* GAME SCREEN */
+  .rf-game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.7rem;
+  }
+
+  .rf-q-counter {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    letter-spacing: 0.12em;
+  }
+
+  .rf-score-live { display: flex; align-items: center; gap: 0.5rem; }
+  .rf-score-num { font-family: 'Orbitron', monospace; font-size: 1.1rem; color: var(--magenta); }
+  .rf-score-streak { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--amber); letter-spacing: 0.08em; }
+
+  .rf-timer-bar-wrap {
+    background: rgba(255,255,255,0.07);
+    height: 4px;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .rf-timer-bar {
+    height: 4px;
+    border-radius: 4px;
+    background: var(--magenta);
+    box-shadow: 0 0 8px rgba(255,0,60,0.6);
+    width: 100%;
+    transition: width linear;
+  }
+
+  .rf-timer-bar.urgent { background: var(--amber); box-shadow: 0 0 8px rgba(255,230,0,0.6); }
+
+  .rf-category-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--magenta);
+    opacity: 0.55;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .rf-question {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--text);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+    min-height: 60px;
+  }
+
+  .rf-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .rf-choice {
+    text-align: left;
+    background: var(--bg2);
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius);
+    padding: 0.85rem 1.1rem;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-family: 'Exo 2', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    transition: all 0.12s;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .rf-choice:hover { border-color: rgba(255,0,60,0.4); background: rgba(255,0,60,0.04); color: var(--text); transform: translateX(2px); }
+  .rf-choice.correct { border-color: var(--green); background: rgba(57,255,20,0.08); color: var(--green); }
+  .rf-choice.wrong { border-color: var(--magenta); background: rgba(255,0,60,0.08); color: var(--magenta); }
+  .rf-choice.reveal { border-color: rgba(57,255,20,0.3); color: rgba(57,255,20,0.6); }
+  .rf-choice.timeout { border-color: rgba(255,230,0,0.3); color: rgba(255,230,0,0.5); }
+  .rf-choice:disabled { cursor: default; transform: none; }
+
+  .rf-choice-letter {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(255,0,60,0.4);
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+  }
+
+  .rf-result {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    padding: 0.6rem 0.8rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--radius-sm);
+    animation: fadeIn 0.2s ease both;
+  }
+
+  .rf-result.correct { color: var(--green); background: rgba(57,255,20,0.06); }
+  .rf-result.wrong { color: var(--magenta); background: rgba(255,0,60,0.06); }
+  .rf-result.timeout { color: var(--amber); background: rgba(255,230,0,0.06); }
+
+  /* RESULTS SCREEN */
+  .rf-result-header { text-align: center; padding: 2rem 0 1.5rem; border-bottom: 1px solid var(--border-dim); margin-bottom: 1.5rem; }
+
+  .rf-final-score {
+    font-family: 'Orbitron', monospace;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--magenta);
+    text-shadow: 0 0 30px rgba(255,0,60,0.4);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .rf-final-label { font-family: 'Share Tech Mono', monospace; font-size: 0.68rem; color: var(--text-faint); letter-spacing: 0.18em; text-transform: uppercase; }
+  .rf-final-streak { font-family: 'Share Tech Mono', monospace; font-size: 0.72rem; color: var(--amber); letter-spacing: 0.1em; margin-top: 0.5rem; }
+
+  .rf-result-message {
+    font-size: 1rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+
+  .rf-missed-wrap { margin-bottom: 1.5rem; }
+  .rf-missed-label { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--text-faint); letter-spacing: 0.14em; margin-bottom: 0.75rem; }
+
+  .rf-missed-item {
+    padding: 0.75rem 1rem;
+    border: 1px solid rgba(255,0,60,0.15);
+    border-radius: var(--radius-sm);
+    margin-bottom: 0.5rem;
+    background: rgba(255,0,60,0.03);
+  }
+
+  .rf-missed-q { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 0.3rem; line-height: 1.5; }
+  .rf-missed-answer { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--green); letter-spacing: 0.06em; }
+
+  .rf-result-btns { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; margin-top: 1.5rem; }
+
+  /* BRIDGE */
+  .rf-bridge {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2.5rem 0 2.5rem;
+  }
+
+  .rf-bridge-line { flex: 1; height: 1px; background: var(--border-dim); }
+
+  .rf-bridge-text {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.68rem;
+    color: var(--text-faint);
+    letter-spacing: 0.08em;
+    text-align: center;
+    line-height: 1.6;
+    max-width: 300px;
+    flex-shrink: 0;
+  }
+
   /* RESPONSIVE */
   @media (max-width: 600px) {
     html { font-size: 16px; }
@@ -1715,6 +1979,73 @@
      DECISION ENGINE — separate section below trainer
 ══════════════════════════════════════════════ -->
 <div id="decision-engine">
+
+<!-- ══ RAPID FIRE ══ -->
+<div id="rapid-fire-section">
+
+  <div class="rf-header-wrap">
+    <div class="de-eyebrow">// Decision Engine · Category 13</div>
+    <h2 class="rf-title">Rapid Fire</h2>
+    <p class="rf-intro">Build your decision-making speed. 9 questions drawn from all 12 categories. Pick your timer, go fast, keep score. No overthinking — that's the point.</p>
+  </div>
+
+  <!-- RF HOME -->
+  <div class="rf-screen active" id="rf-home">
+    <div class="rf-timer-pick">
+      <div class="rf-timer-label">// Choose your timer per question</div>
+      <div class="rf-timer-btns">
+        <button class="rf-timer-btn active" onclick="rfSetTimer(3,this)">3 sec</button>
+        <button class="rf-timer-btn" onclick="rfSetTimer(5,this)">5 sec</button>
+        <button class="rf-timer-btn" onclick="rfSetTimer(7,this)">7 sec</button>
+      </div>
+    </div>
+    <div class="rf-stats-row" id="rf-stats-row" style="display:none">
+      <div class="rf-stat"><div class="rf-stat-num" id="rf-best-score">—</div><div class="rf-stat-label">Best Score</div></div>
+      <div class="rf-stat"><div class="rf-stat-num" id="rf-best-streak">—</div><div class="rf-stat-label">Best Streak</div></div>
+      <div class="rf-stat"><div class="rf-stat-num" id="rf-games-played">—</div><div class="rf-stat-label">Rounds Played</div></div>
+    </div>
+    <button class="rf-start-btn" onclick="rfStart()">Start Round ↗</button>
+  </div>
+
+  <!-- RF GAME -->
+  <div class="rf-screen" id="rf-game">
+    <div class="rf-game-header">
+      <div class="rf-q-counter" id="rf-q-counter">1 / 9</div>
+      <div class="rf-score-live"><span class="rf-score-num" id="rf-score-live">0</span> <span class="rf-score-streak" id="rf-streak-live"></span></div>
+    </div>
+    <div class="rf-timer-bar-wrap"><div class="rf-timer-bar" id="rf-timer-bar"></div></div>
+    <div class="rf-category-tag" id="rf-category-tag"></div>
+    <div class="rf-question" id="rf-question"></div>
+    <div class="rf-choices" id="rf-choices"></div>
+    <div class="rf-result" id="rf-result" style="display:none"></div>
+  </div>
+
+  <!-- RF RESULTS -->
+  <div class="rf-screen" id="rf-results">
+    <div class="rf-result-header">
+      <div class="de-eyebrow">// Round Complete</div>
+      <div class="rf-final-score" id="rf-final-score">0 / 9</div>
+      <div class="rf-final-label">Questions Answered Correctly</div>
+      <div class="rf-final-streak" id="rf-final-streak"></div>
+    </div>
+    <div class="rf-result-message" id="rf-result-message"></div>
+    <div class="rf-missed-wrap" id="rf-missed-wrap" style="display:none">
+      <div class="rf-missed-label">// Questions You Missed</div>
+      <div id="rf-missed-list"></div>
+    </div>
+    <div class="rf-result-btns">
+      <button class="rf-start-btn" onclick="rfStart()">Play Again ↗</button>
+      <button class="btn btn-dim" onclick="rfGoHome()">← Change Timer</button>
+    </div>
+  </div>
+
+  <div class="rf-bridge">
+    <div class="rf-bridge-line"></div>
+    <div class="rf-bridge-text">Want to explore a decision in depth? Try one of the 12 categories below.</div>
+    <div class="rf-bridge-line"></div>
+  </div>
+
+</div><!-- end rapid-fire-section -->
 
   <!-- HOME -->
   <div class="de-screen active" id="de-home">
@@ -2312,6 +2643,276 @@ Write 3 sentences only. Open by naming what they read well. If they missed somet
     insightEl.textContent = `Score: ${correct}/${total} on the ${d.label} interface at ${currentDifficulty} difficulty.${missedConcepts ? ' Gaps identified in: ' + missedConcepts + '.' : ' Clean read across all scenarios.'}`;
   }
 }
+// ══════════════════════════════════════════════
+// RAPID FIRE ENGINE
+// ══════════════════════════════════════════════
+
+const RF_QUESTIONS = [
+  // STAY ALIVE
+  {cat:'Stay Alive',q:'You slept 4 hours. You have a full day ahead. First move?',choices:['Power through on caffeine','Cancel everything and sleep','Prioritize only essential tasks','Take a 20-min nap now'],correct:3},
+  {cat:'Stay Alive',q:'You feel chest tightness during a workout. You:',choices:['Push harder — no pain no gain','Stop immediately and rest','Slow down and monitor it','Ignore it, probably nothing'],correct:1},
+  {cat:'Stay Alive',q:'You haven\'t eaten in 8 hours and have a big decision to make. You:',choices:['Decide now while focused','Eat first, then decide','Delay the decision indefinitely','Ask someone else to decide'],correct:1},
+  {cat:'Stay Alive',q:'Your environment is consistently stressful. The highest-leverage change is:',choices:['Better stress management techniques','Change the environment','Work harder to adapt','Accept it as normal'],correct:1},
+
+  // FEEL BETTER
+  {cat:'Feel Better',q:'You\'re furious at a coworker in a meeting. Best immediate response?',choices:['Express your frustration clearly','Pause and breathe before speaking','Leave the meeting','Say nothing and seethe'],correct:1},
+  {cat:'Feel Better',q:'You\'re overwhelmed. Most effective 5-minute reset?',choices:['Check your phone','Step outside and walk','Make a to-do list','Call a friend to vent'],correct:1},
+  {cat:'Feel Better',q:'Someone criticizes your work publicly. You:',choices:['Defend yourself immediately','Thank them and assess later','Ignore it completely','Apologize reflexively'],correct:1},
+  {cat:'Feel Better',q:'You wake up anxious about nothing specific. Best first action?',choices:['Distract yourself immediately','Identify what\'s actually worrying you','Go back to sleep','Check your phone for news'],correct:1},
+
+  // FOCUS CLEARLY
+  {cat:'Focus Clearly',q:'You have 3 urgent tasks and 2 hours. You:',choices:['Do all three partially','Pick the highest-impact one first','Do the easiest one first','Ask your boss to prioritize'],correct:1},
+  {cat:'Focus Clearly',q:'Your phone keeps distracting you during deep work. You:',choices:['Try harder to resist it','Put it in another room','Turn on do not disturb','Check it every 10 minutes as reward'],correct:1},
+  {cat:'Focus Clearly',q:'You\'ve been context-switching all day. Best recovery?',choices:['Keep going — you\'re in the zone','Block uninterrupted time tomorrow','Work later into the night','Multitask more efficiently'],correct:1},
+  {cat:'Focus Clearly',q:'A new opportunity arrives while you\'re mid-project. You:',choices:['Drop the project and pursue it','Note it and finish the project','Do both simultaneously','Ignore it entirely'],correct:1},
+
+  // LEARN ACCURATELY
+  {cat:'Learn Accurately',q:'You read something that contradicts what you believe. You:',choices:['Dismiss it — your experience proves otherwise','Investigate whether it\'s credible','Share it immediately','Accept it as true'],correct:1},
+  {cat:'Learn Accurately',q:'You need to learn a new skill fast. Best approach?',choices:['Read everything about it first','Find an expert and ask specific questions','Watch tutorials for hours','Try and fail repeatedly'],correct:3},
+  {cat:'Learn Accurately',q:'You\'ve been doing something the same way for years. Someone suggests a better way. You:',choices:['Dismiss it — experience beats theory','Test it seriously before judging','Adopt it immediately','Ask why it\'s better before trying'],correct:3},
+  {cat:'Learn Accurately',q:'Which is harder to unlearn than to learn?',choices:['A new language','A wrong mental model','A physical skill','A new software tool'],correct:1},
+
+  // CHOOSE WISELY
+  {cat:'Choose Wisely',q:'You\'re about to make a big decision. The most useful thing to do first is:',choices:['Trust your gut','List what you\'d need to prove yourself wrong','Ask friends what they\'d do','Sleep on it'],correct:1},
+  {cat:'Choose Wisely',q:'You\'ve invested 6 months in a project that\'s clearly not working. You:',choices:['Push harder — 6 months can\'t be wasted','Cut it and apply the learning elsewhere','Find someone to blame','Pivot without acknowledging the failure'],correct:1},
+  {cat:'Choose Wisely',q:'Two options: certain $50 gain OR 60% chance of $100. Which do you pick and why does it matter?',choices:['$50 — certainty is always better','$100 — expected value is higher','It depends on what the money is for','Flip a coin'],correct:2},
+  {cat:'Choose Wisely',q:'You feel urgency to decide right now. Most of the time this urgency is:',choices:['Real — timing matters','Manufactured — artificial pressure','Your instincts signaling danger','Unique to this situation'],correct:1},
+
+  // CONNECT SELECTIVELY
+  {cat:'Connect Selectively',q:'Someone repeatedly crosses your stated boundary. You:',choices:['State it more clearly one more time','Enforce a consequence','Accept it\'s who they are','Distance yourself without explanation'],correct:1},
+  {cat:'Connect Selectively',q:'A new relationship feels exciting but draining. This is:',choices:['Normal — all good things take energy','A sign worth paying attention to','Just initial adjustment','The price of connection'],correct:1},
+  {cat:'Connect Selectively',q:'Your inner circle mostly agrees with you on everything. This is:',choices:['A sign of deep alignment','A risk — you need friction to think clearly','Comfortable and fine','Proof you\'ve chosen well'],correct:1},
+  {cat:'Connect Selectively',q:'Trust is broken in an important relationship. First step?',choices:['Forgive and move on','Name what happened clearly','Give it time','Pretend it didn\'t happen'],correct:1},
+
+  // BUILD INTENTIONALLY
+  {cat:'Build Intentionally',q:'You have talent in two areas — one pays well, one matters to you. You:',choices:['Follow the money','Follow the meaning','Find where they overlap','Pick one and commit'],correct:2},
+  {cat:'Build Intentionally',q:'You\'re asked to take on more than you can do well. You:',choices:['Say yes and figure it out later','Decline clearly','Accept with conditions','Say yes to please them'],correct:1},
+  {cat:'Build Intentionally',q:'Your identity says "I\'m not the kind of person who..." This phrase is usually:',choices:['Accurate self-knowledge','A story limiting your options','Healthy boundary-setting','Permanent and fixed'],correct:1},
+  {cat:'Build Intentionally',q:'You want to build something new. The most dangerous first step is:',choices:['Starting before you\'re ready','Waiting until you have a perfect plan','Telling too many people too early','Starting small'],correct:1},
+
+  // ALLOCATE RESOURCES
+  {cat:'Allocate Resources',q:'You get an unexpected $1000. The highest-leverage use is:',choices:['Spend it on something you\'ve wanted','Invest it','Pay down high-interest debt','Save it'],correct:2},
+  {cat:'Allocate Resources',q:'You\'re spending money on something that no longer serves you. The sunk cost is:',choices:['Reason to keep paying','Irrelevant to the next decision','A loss to grieve before moving on','Proof it was a mistake'],correct:1},
+  {cat:'Allocate Resources',q:'Time is more valuable than money because:',choices:['It sounds good to say','You can always make more money, never more time','Everyone has the same amount','Productivity gurus say so'],correct:1},
+  {cat:'Allocate Resources',q:'You\'re debating whether to hire help. The deciding factor should be:',choices:['Can I afford it?','Does it free me for higher-value work?','Is it embarrassing to need help?','What would others think?'],correct:1},
+
+  // MANAGE RISK
+  {cat:'Manage Risk',q:'You\'re in an environment that consistently brings out the worst in you. The solution is:',choices:['Try harder to resist the environment','Change the environment','Build more willpower','Meditate more'],correct:1},
+  {cat:'Manage Risk',q:'A small bet can teach you something. A large bet can:',choices:['Teach you more','Teach you nothing if it wipes you out','Only be justified by big rewards','Always be recovered from'],correct:1},
+  {cat:'Manage Risk',q:'You\'ve been persisting on something for a long time with no results. The question is:',choices:['How much longer should I persist?','Am I persisting on the right thing?','Who can I blame for the results?','How do I work harder?'],correct:1},
+  {cat:'Manage Risk',q:'Your gut says stop. Your ego says continue. Which do you trust?',choices:['Always the gut','Always reason over emotion','Neither — find more data','It depends on the stakes'],correct:3},
+
+  // ACT ETHICALLY
+  {cat:'Act Ethically',q:'You notice something unfair happening to someone else. Easiest thing to do?',choices:['Speak up','Do nothing — not your problem','Report it anonymously','Ask others what they think'],correct:1},
+  {cat:'Act Ethically',q:'You can gain an advantage by bending a rule slightly. You:',choices:['Take it — everyone does it','Decline — the rule exists for a reason','Negotiate the rule openly','Ask if anyone would notice'],correct:1},
+  {cat:'Act Ethically',q:'Honesty has a real cost in this situation. You:',choices:['Choose comfort — it\'s a small lie','Pay the cost and be honest','Find a way to be technically truthful','Delay until it resolves itself'],correct:1},
+  {cat:'Act Ethically',q:'The right thing and the easy thing are different. How often should you choose the right thing?',choices:['When convenient','When others are watching','Always, if you\'re serious about it','When the stakes are high enough'],correct:2},
+
+  // ADAPT OVER TIME
+  {cat:'Adapt Over Time',q:'Your old approach isn\'t working anymore. The problem is probably:',choices:['You need more discipline','The environment changed — your approach needs to','You\'re not working hard enough','The approach was never right'],correct:1},
+  {cat:'Adapt Over Time',q:'You\'ve changed your mind on something important. This is:',choices:['A sign of weakness','Evidence you\'re thinking clearly','Proof you were wrong before','Confusing to others'],correct:1},
+  {cat:'Adapt Over Time',q:'Letting go of a past identity is hard because:',choices:['It makes you lose yourself','Identity is stored in habits and relationships, not just thoughts','You might regret it','Others defined you by it'],correct:1},
+  {cat:'Adapt Over Time',q:'Consistency vs flexibility — when does consistency become rigidity?',choices:['When others tell you so','When it stops producing results','After 10 years','When you feel stuck'],correct:1},
+
+  // DEFINE MEANING
+  {cat:'Define Meaning',q:'You achieved a big goal and felt... empty. This means:',choices:['You need a bigger goal','The goal wasn\'t connected to what actually matters to you','Goals don\'t bring fulfillment','You need to celebrate harder'],correct:1},
+  {cat:'Define Meaning',q:'Legacy is built primarily through:',choices:['What you say','The consistent choices you make over time','Major one-time acts','How you\'re remembered after you\'re gone'],correct:1},
+  {cat:'Define Meaning',q:'If your life ended tomorrow, what would you regret most?',choices:['Things you did','Things you didn\'t do','Things others did to you','Things you said'],correct:1},
+  {cat:'Define Meaning',q:'The clearest signal that something matters to you is:',choices:['You think about it often','You act on it consistently even at a cost','You tell others about it','You feel passionate when discussing it'],correct:1},
+];
+
+let rfTimer = 5;
+let rfTimerInterval = null;
+let rfTimeLeft = 0;
+let rfCurrentQ = 0;
+let rfRoundQuestions = [];
+let rfScore = 0;
+let rfStreak = 0;
+let rfBestStreak = 0;
+let rfMissed = [];
+
+function rfSetTimer(t, btn) {
+  rfTimer = t;
+  document.querySelectorAll('.rf-timer-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function rfGoHome() {
+  clearInterval(rfTimerInterval);
+  document.querySelectorAll('.rf-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('rf-home').classList.add('active');
+  rfLoadStats();
+}
+
+function rfLoadStats() {
+  try {
+    const best = parseInt(localStorage.getItem('rf_best_score') || '0');
+    const bestStreak = parseInt(localStorage.getItem('rf_best_streak') || '0');
+    const played = parseInt(localStorage.getItem('rf_games_played') || '0');
+    if (played > 0) {
+      document.getElementById('rf-stats-row').style.display = 'flex';
+      document.getElementById('rf-best-score').textContent = `${best}/9`;
+      document.getElementById('rf-best-streak').textContent = bestStreak;
+      document.getElementById('rf-games-played').textContent = played;
+    }
+  } catch(e) {}
+}
+
+function rfStart() {
+  clearInterval(rfTimerInterval);
+  rfScore = 0; rfStreak = 0; rfBestStreak = 0; rfCurrentQ = 0; rfMissed = [];
+  rfRoundQuestions = [...RF_QUESTIONS].sort(() => Math.random() - 0.5).slice(0, 9);
+  document.querySelectorAll('.rf-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('rf-game').classList.add('active');
+  rfLoadQuestion();
+}
+
+function rfLoadQuestion() {
+  if (rfCurrentQ >= 9) { rfEndRound(); return; }
+  const q = rfRoundQuestions[rfCurrentQ];
+  document.getElementById('rf-q-counter').textContent = `${rfCurrentQ + 1} / 9`;
+  document.getElementById('rf-score-live').textContent = rfScore;
+  document.getElementById('rf-streak-live').textContent = rfStreak > 1 ? `🔥 ${rfStreak}` : '';
+  document.getElementById('rf-category-tag').textContent = `// ${q.cat}`;
+  document.getElementById('rf-question').textContent = q.q;
+  document.getElementById('rf-result').style.display = 'none';
+
+  const choicesEl = document.getElementById('rf-choices');
+  choicesEl.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'rf-choice';
+    btn.innerHTML = `<span class="rf-choice-letter">[${letters[i]}]</span><span>${c}</span>`;
+    btn.onclick = () => rfAnswer(i);
+    choicesEl.appendChild(btn);
+  });
+
+  // Timer
+  const bar = document.getElementById('rf-timer-bar');
+  bar.style.transition = 'none';
+  bar.style.width = '100%';
+  bar.className = 'rf-timer-bar';
+  rfTimeLeft = rfTimer;
+
+  setTimeout(() => {
+    bar.style.transition = `width ${rfTimer}s linear`;
+    bar.style.width = '0%';
+  }, 50);
+
+  let elapsed = 0;
+  rfTimerInterval = setInterval(() => {
+    elapsed += 0.1;
+    if (elapsed >= rfTimer * 0.6) bar.classList.add('urgent');
+    if (elapsed >= rfTimer) {
+      clearInterval(rfTimerInterval);
+      rfTimeout();
+    }
+  }, 100);
+}
+
+function rfAnswer(chosen) {
+  clearInterval(rfTimerInterval);
+  const q = rfRoundQuestions[rfCurrentQ];
+  const isCorrect = chosen === q.correct;
+  const letters = ['A','B','C','D'];
+
+  document.querySelectorAll('.rf-choice').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === chosen && isCorrect) btn.classList.add('correct');
+    else if (i === chosen && !isCorrect) btn.classList.add('wrong');
+    else if (i === q.correct) btn.classList.add('reveal');
+  });
+
+  const resultEl = document.getElementById('rf-result');
+  if (isCorrect) {
+    rfScore++; rfStreak++;
+    if (rfStreak > rfBestStreak) rfBestStreak = rfStreak;
+    resultEl.className = 'rf-result correct';
+    resultEl.textContent = rfStreak > 2 ? `✓ Correct — ${rfStreak} in a row!` : '✓ Correct';
+  } else {
+    rfMissed.push({ q: q.q, answer: q.choices[q.correct] });
+    rfStreak = 0;
+    resultEl.className = 'rf-result wrong';
+    resultEl.textContent = `✗ The stronger answer: ${letters[q.correct]}. ${q.choices[q.correct]}`;
+  }
+  resultEl.style.display = 'block';
+  document.getElementById('rf-score-live').textContent = rfScore;
+  document.getElementById('rf-streak-live').textContent = rfStreak > 1 ? `🔥 ${rfStreak}` : '';
+
+  rfCurrentQ++;
+  setTimeout(rfLoadQuestion, isCorrect ? 900 : 1600);
+}
+
+function rfTimeout() {
+  const q = rfRoundQuestions[rfCurrentQ];
+  const letters = ['A','B','C','D'];
+  rfMissed.push({ q: q.q, answer: q.choices[q.correct] });
+  rfStreak = 0;
+
+  document.querySelectorAll('.rf-choice').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.correct) btn.classList.add('reveal');
+    else btn.classList.add('timeout');
+  });
+
+  const resultEl = document.getElementById('rf-result');
+  resultEl.className = 'rf-result timeout';
+  resultEl.textContent = `⏱ Time's up — ${letters[q.correct]}. ${q.choices[q.correct]}`;
+  resultEl.style.display = 'block';
+  document.getElementById('rf-streak-live').textContent = '';
+
+  rfCurrentQ++;
+  setTimeout(rfLoadQuestion, 1800);
+}
+
+function rfEndRound() {
+  clearInterval(rfTimerInterval);
+
+  // Save stats
+  try {
+    const prevBest = parseInt(localStorage.getItem('rf_best_score') || '0');
+    const prevStreak = parseInt(localStorage.getItem('rf_best_streak') || '0');
+    const played = parseInt(localStorage.getItem('rf_games_played') || '0');
+    if (rfScore > prevBest) localStorage.setItem('rf_best_score', rfScore);
+    if (rfBestStreak > prevStreak) localStorage.setItem('rf_best_streak', rfBestStreak);
+    localStorage.setItem('rf_games_played', played + 1);
+  } catch(e) {}
+
+  document.querySelectorAll('.rf-screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('rf-results').classList.add('active');
+
+  const scoreEl = document.getElementById('rf-final-score');
+  scoreEl.textContent = `${rfScore} / 9`;
+  scoreEl.style.color = rfScore >= 7 ? 'var(--green)' : rfScore >= 5 ? 'var(--amber)' : 'var(--magenta)';
+
+  document.getElementById('rf-final-streak').textContent = rfBestStreak > 1 ? `Best streak this round: ${rfBestStreak}` : '';
+
+  const messages = [
+    [7, ['Sharp. Your instincts are calibrated.', 'Fast and accurate — that\'s the combination.', 'You\'re reading situations quickly and correctly.']],
+    [5, ['Solid foundation. A few blind spots worth noting.', 'Good speed, some hesitation on the harder calls.', 'More right than wrong — keep building.']],
+    [0, ['Speed takes practice. The pattern is more important than the score.', 'Decision muscle builds with repetition. Go again.', 'Every miss is a data point. Notice the pattern.']]
+  ];
+  let msg = messages[2][1][Math.floor(Math.random() * 3)];
+  for (const [min, opts] of messages) { if (rfScore >= min) { msg = opts[Math.floor(Math.random() * 3)]; break; } }
+  document.getElementById('rf-result-message').textContent = msg;
+
+  const missedWrap = document.getElementById('rf-missed-wrap');
+  const missedList = document.getElementById('rf-missed-list');
+  if (rfMissed.length > 0) {
+    missedWrap.style.display = 'block';
+    missedList.innerHTML = rfMissed.map(m => `
+      <div class="rf-missed-item">
+        <div class="rf-missed-q">${m.q}</div>
+        <div class="rf-missed-answer">→ ${m.answer}</div>
+      </div>`).join('');
+  } else {
+    missedWrap.style.display = 'none';
+  }
+}
+
+rfLoadStats();
+
 // ══════════════════════════════════════════════
 // DECISION ENGINE
 // ══════════════════════════════════════════════
