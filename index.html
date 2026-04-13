@@ -1942,6 +1942,7 @@ let sessionResults = [];
 let currentDifficulty = 'standard';
 let generatedScenarios = [];
 let generationInProgress = false;
+let generationError = null;
 
 function show(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -2041,7 +2042,7 @@ async function generateAllScenarios() {
     edge: 'Counterintuitive edge cases that challenge assumptions and apparent exceptions to principles.'
   };
 
-  const prompt = `You are the Gravificer Reality Interface Trainer — a precision learning instrument. Generate exactly 9 scenario-based questions testing deep understanding of the ${d.label} interface (${d.description}).
+  const prompt = `You are the Gravificer Reality Interface Trainer — a precision learning instrument. Generate exactly 5 scenario-based questions testing deep understanding of the ${d.label} interface (${d.description}).
 
 Difficulty: ${currentDifficulty.toUpperCase()} — ${diffMap[currentDifficulty]}
 
@@ -2052,10 +2053,10 @@ Rules:
 - CRITICAL: Distribute correct answers randomly across positions A, B, C, and D. Do NOT place the correct answer in the same position repeatedly. Across 9 scenarios, spread correct answers across all four positions — some A, some B, some C, some D. Vary them deliberately.
 - Wrong answers are plausible but reveal a misreading of the interface
 - Feedback explains the mechanism at a systems level — not just what is correct but why
-- Each scenario tests a different core concept within the domain — vary widely across the 9 scenarios
+- Each scenario tests a different core concept within the domain
 - Vary contexts: personal, professional, social, physical, financial, creative, athletic, relational
 - Generate fresh, original scenarios — not standard textbook examples
-- Build from concrete to complex across the 9 scenarios
+- Build from concrete to complex across the scenarios
 
 Respond ONLY with valid JSON, no preamble, no markdown:
 {"scenarios":[{"concept":"concept name","question":"scenario text","choices":["A","B","C","D"],"correct":0,"feedback":"mechanistic explanation"}]}`;
@@ -2066,16 +2067,26 @@ Respond ONLY with valid JSON, no preamble, no markdown:
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 2500,
+        max_tokens: 1500,
         messages: [{ role: 'user', content: prompt }]
       })
     });
     const data = await response.json();
-    const text = data.content.map(i => i.text || '').join('');
-    const clean = text.replace(/```json|```/g, '').trim();
-    generatedScenarios = JSON.parse(clean).scenarios;
+    if (!response.ok || data.error) {
+      console.error('Worker error:', data);
+      generatedScenarios = null;
+      generationError = `API error: ${data.error?.message || response.status}`;
+    } else {
+      const text = data.content.map(i => i.text || '').join('');
+      const clean = text.replace(/```json|```/g, '').trim();
+      const parsed = JSON.parse(clean);
+      generatedScenarios = parsed.scenarios;
+      generationError = null;
+    }
   } catch (e) {
+    console.error('Generation error:', e);
     generatedScenarios = null;
+    generationError = e.message || 'Unknown error';
   }
   generationInProgress = false;
   loadScenario();
@@ -2084,7 +2095,7 @@ Respond ONLY with valid JSON, no preamble, no markdown:
 function loadScenario() {
   answered = false;
   const idx = currentScenarioIndex;
-  const total = 9;
+  const total = 5;
 
   document.getElementById('step-label').textContent = `SCENARIO ${idx + 1} OF ${total}`;
   document.getElementById('progress-fill').style.width = `${(idx / total) * 100}%`;
@@ -2092,10 +2103,16 @@ function loadScenario() {
   document.getElementById('nav-row').style.display = 'none';
 
   if (!generatedScenarios) {
-    document.getElementById('scenario-text').className = 'scenario-box';
-    document.getElementById('scenario-text').textContent = '// Generation failed. Please retry.';
+    const sBox = document.getElementById('scenario-text');
+    sBox.className = 'scenario-box';
+    sBox.innerHTML = `
+      <div style="text-align:center;padding:1rem 0">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:0.72rem;color:var(--magenta);letter-spacing:0.12em;margin-bottom:0.75rem">// GENERATION FAILED</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);margin-bottom:0.5rem">Could not load scenarios. This is usually a temporary API issue.</div>
+        ${generationError ? `<div style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:rgba(255,0,60,0.5);margin-bottom:1rem">${generationError}</div>` : ''}
+        <button class="btn btn-cyan" onclick="generateAllScenarios()" style="margin-top:0.5rem">Try Again ↗</button>
+      </div>`;
     document.getElementById('choices-container').innerHTML = '';
-    document.getElementById('nav-row').style.display = 'flex';
     return;
   }
 
@@ -2151,20 +2168,20 @@ function handleChoice(chosen) {
   document.getElementById('feedback-content').textContent = s.feedback;
   fb.style.display = 'block';
 
-  const isLast = currentScenarioIndex >= 8;
+  const isLast = currentScenarioIndex >= 4;
   document.getElementById('btn-next').textContent = isLast ? 'View Interface Report ↗' : 'Next Scenario ↗';
   document.getElementById('nav-row').style.display = 'flex';
 }
 
 function nextScenario() {
-  if (currentScenarioIndex >= 8) { showResults(); return; }
+  if (currentScenarioIndex >= 4) { showResults(); return; }
   currentScenarioIndex++;
   loadScenario();
 }
 
 function retryDomain() {
   currentScenarioIndex = 0; answered = false;
-  sessionResults = []; generatedScenarios = [];
+  sessionResults = []; generatedScenarios = []; generationError = null;
   switchTab('scenarios');
   document.getElementById('tab-btn-scenarios').classList.add('active');
   document.getElementById('tab-btn-explorer').classList.remove('active');
@@ -2186,7 +2203,7 @@ function retryDomain() {
 
 async function showResults() {
   const correct = sessionResults.filter(r => r.correct).length;
-  const total = 9;
+  const total = 5;
   const d = DOMAINS[currentDomain];
 
   // Save to session history
@@ -2271,7 +2288,7 @@ async function showResults() {
   const insightPrompt = `You are Gravificer — a precision learning system generating a personalized insight report after a training session.
 
 Domain tested: ${d.label} (${d.description})
-Score: ${correct}/${total} at ${currentDifficulty} difficulty
+Score: ${correct}/5 at ${currentDifficulty} difficulty
 Concepts read correctly: ${readConcepts || 'none'}
 Concepts missed: ${missedConcepts || 'none'}
 Previous session scores: ${prevScores || 'first session'}
