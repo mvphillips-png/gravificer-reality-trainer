@@ -2299,7 +2299,7 @@ Write 3 sentences only. Open by naming what they read well. If they missed somet
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
+        max_tokens: 200,
         messages: [{ role: 'user', content: insightPrompt }]
       })
     });
@@ -2737,7 +2737,7 @@ Write 3 sentences only. Name the pattern in their choices and what it reveals ab
   try {
     const r = await fetch('https://gravificer-proxy.mvphillips.workers.dev/', {
       method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: stylePrompt }] })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 200, messages: [{ role: 'user', content: stylePrompt }] })
     });
     const d = await r.json();
     styleEl.className = 'de-insight-text';
