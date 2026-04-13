@@ -2273,7 +2273,7 @@ const DOMAINS = {
   predicting: {
     label: 'Predicting', sub: 'Forecasting · Worldview',
     badge: '// Interface 09 — Predicting', accent: '#84cc16',
-    description: 'forecasting, prediction, calibration, worldview, base rates, reference class forecasting, superforecasting, updating beliefs, outside view vs inside view, overconfidence, scenario planning, measuring prediction accuracy',
+    description: 'forecasting and prediction as everyday skills — making better guesses, noticing when you are overconfident, checking what usually happens in similar situations, updating your thinking when new information arrives, and building a more accurate picture of how the world actually works. Use plain language. No statistical jargon. Scenarios should feel like real decisions a normal person faces — job choices, project timelines, news events, personal plans.',
     concepts: [
       { name: 'Calibration', tagline: 'Your confidence should match your accuracy rate.', body: 'A well-calibrated forecaster who says "I\'m 70% confident" is right about 70% of the time — not 100%, not 50%. Most people are overconfident: they say 90% and are right 60% of the time. Calibration is a trainable skill. Keeping a prediction log and tracking outcomes is how it improves.', signal: 'Signal: Track your predictions. The gap between your stated confidence and your actual accuracy is your calibration error.' },
       { name: 'Base Rates', tagline: 'Most things are less unique than they feel from the inside.', body: 'The outside view asks: what happens to most people in situations like this? The inside view focuses on the specific details of your situation. Most forecasting errors come from ignoring base rates and over-indexing on the unique aspects of the current situation. Your startup is special — but most startups still fail.', signal: 'Signal: Before making a prediction, ask: what\'s the base rate for situations like this? Then adjust from there.' },
@@ -2284,7 +2284,7 @@ const DOMAINS = {
   probability: {
     label: 'Probability', sub: 'Probabilistic Thinking',
     badge: '// Interface 10 — Probability', accent: '#38bdf8',
-    description: 'probability, probabilistic thinking, expected value, confidence intervals, frequency estimation, combining forecasts, uncertainty quantification, conditional probability, false positives, statistical reasoning, thinking in bets',
+    description: 'thinking in likelihoods instead of certainties — everyday situations where people assume something is definitely true or definitely false, when really it is likely or unlikely. No formulas, no Bayes theorem, no statistical vocabulary at standard difficulty. Use concrete situations: medical tests, weather, job interviews, sports, news. Show how thinking in percentages and ranges leads to better decisions than thinking in absolutes.',
     concepts: [
       { name: 'Expected Value', tagline: 'Multiply the probability by the outcome — then decide.', body: 'Expected value is probability multiplied by outcome magnitude. A 10% chance of $1,000 has an expected value of $100. Most people evaluate options by their best-case outcome or their most likely outcome — both are wrong. Expected value forces you to weight outcomes by how likely they actually are.', signal: 'Signal: Before any significant decision, estimate both the probability and the magnitude of each outcome. Multiply. Then compare.' },
       { name: 'Confidence Intervals', tagline: 'Single-point estimates are almost always wrong — ranges are more honest.', body: 'A confidence interval expresses uncertainty as a range. "This will cost between $8,000 and $15,000" is more honest than "$10,000." Most people give single-point estimates because ranges feel indecisive. But a range that captures the true answer 90% of the time is more useful than a precise answer that\'s wrong 70% of the time.', signal: 'Signal: Replace single-point estimates with ranges. If you can\'t tolerate the worst end of your range, you\'re not actually prepared.' },
@@ -2396,9 +2396,9 @@ async function generateAllScenarios() {
   generationInProgress = true;
   const d = DOMAINS[currentDomain];
   const diffMap = {
-    standard: 'Realistic everyday situations most people would recognize. Concrete, grounded contexts.',
-    advanced: 'Complex, nuanced scenarios where multiple principles interact. Require deeper systemic analysis.',
-    edge: 'Counterintuitive edge cases that challenge assumptions and apparent exceptions to principles.'
+    standard: 'Assume the person has ZERO prior knowledge of this subject. No jargon, no assumed vocabulary, no technical terms without explanation. Teach the concept through the scenario itself — the situation should make the principle visible without naming it. Use everyday language and relatable real-life contexts. The goal is that someone encountering this idea for the first time walks away understanding it.',
+    advanced: 'Assume basic familiarity with the domain. Use proper terminology. Present complex, nuanced scenarios where multiple principles interact. Require deeper analysis to identify the correct answer.',
+    edge: 'Assume solid domain knowledge. Present counterintuitive edge cases, apparent exceptions to principles, and scenarios that challenge assumptions. These should be genuinely hard — even for people who know the domain well.'
   };
 
   const prompt = `You are the Gravificer Reality Interface Trainer — a precision learning instrument. Generate exactly 3 scenario-based questions testing deep understanding of the ${d.label} interface (${d.description}).
