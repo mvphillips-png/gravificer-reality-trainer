@@ -1642,8 +1642,8 @@
           <div class="loader-dot"></div>
           <div class="loader-dot"></div>
         </div>
-        <div class="loader-label">// CLAUDE IS GENERATING YOUR SCENARIOS</div>
-        <div class="loader-sublabel">Building 9 unique scenarios for this interface.<br>This takes about 10–15 seconds.</div>
+        <div class="loader-label">// GRAVIFICER + CLAUDE ARE BUILDING YOUR SESSION</div>
+        <div class="loader-sublabel">Your exclusive training scenarios are being crafted.<br>Please hold — this is worth the wait.</div>
       </div>
 
       <div class="choices-grid" id="choices-container"></div>
@@ -1747,7 +1747,7 @@
     </div>
 
     <div class="de-step-row">
-      <span class="de-step-label" id="de-step-label">DECISION 1 OF 5</span>
+      <span class="de-step-label" id="de-step-label">DECISION 1 OF 4</span>
       <span class="de-step-type" id="de-step-type"></span>
     </div>
     <div class="de-progress-wrap"><div class="de-progress-fill" id="de-progress-fill" style="width:0%"></div></div>
@@ -1759,8 +1759,8 @@
           <div class="de-loading-dot"></div>
           <div class="de-loading-dot"></div>
         </div>
-        <div class="de-loading-label">// CLAUDE IS BUILDING YOUR SESSION</div>
-        <div class="de-loading-sub">Generating 5 personalized decision scenarios.<br>This takes about 10–15 seconds.</div>
+        <div class="de-loading-label">// GRAVIFICER + CLAUDE ARE BUILDING YOUR SESSION</div>
+        <div class="de-loading-sub">Your exclusive decision scenarios are being crafted.<br>Please hold — this is worth the wait.</div>
       </div>
       <div id="de-scenario-content" style="display:none">
         <div class="de-context-label" id="de-context-label"></div>
@@ -2111,8 +2111,8 @@ function loadScenario() {
         <div class="loader-dot"></div>
         <div class="loader-dot"></div>
       </div>
-      <div class="loader-label">// CLAUDE IS GENERATING YOUR SCENARIOS</div>
-      <div class="loader-sublabel">Almost ready — just a moment more.</div>`;
+      <div class="loader-label">// GRAVIFICER + CLAUDE ARE BUILDING YOUR SESSION</div>
+      <div class="loader-sublabel">Your exclusive training scenarios are being crafted — almost there.</div>`;
     document.getElementById('choices-container').innerHTML = '';
     setTimeout(() => { if (!generationInProgress) loadScenario(); }, 600);
     return;
@@ -2179,8 +2179,8 @@ function retryDomain() {
       <div class="loader-dot"></div>
       <div class="loader-dot"></div>
     </div>
-    <div class="loader-label">// CLAUDE IS GENERATING YOUR SCENARIOS</div>
-    <div class="loader-sublabel">Building 9 unique scenarios for this interface.<br>This takes about 10–15 seconds.</div>`;
+    <div class="loader-label">// GRAVIFICER + CLAUDE ARE BUILDING YOUR SESSION</div>
+    <div class="loader-sublabel">Your exclusive training scenarios are being crafted.<br>Please hold — this is worth the wait.</div>`;
   document.getElementById('choices-container').innerHTML = '';
   document.getElementById('feedback-box').style.display = 'none';
   document.getElementById('nav-row').style.display = 'none';
@@ -2450,7 +2450,7 @@ let deSessionDecisions = [];
 let deCurrentStep = 0;
 let deGeneratedSession = null;
 let deGenerating = false;
-const DE_TOTAL = 5;
+const DE_TOTAL = 4;
 
 function deShow(id) {
   document.querySelectorAll('.de-screen').forEach(s => s.classList.remove('active'));
