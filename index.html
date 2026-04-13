@@ -1506,33 +1506,59 @@
   .rf-screen { display: none; }
   .rf-screen.active { display: block; animation: fadeIn 0.3s ease both; }
 
-  .rf-timer-pick { margin-bottom: 1.5rem; }
+  .rf-timer-pick { display: none; }
+  .rf-timer-btns { display: none; }
+  .rf-timer-btn { display: none; }
+  .rf-timer-bar-wrap { display: none; }
+  .rf-timer-bar { display: none; }
 
-  .rf-timer-label {
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--text-faint);
-    letter-spacing: 0.14em;
-    margin-bottom: 0.75rem;
+  .rf-game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
   }
 
-  .rf-timer-btns { display: flex; gap: 0.6rem; }
+  .rf-game-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
 
-  .rf-timer-btn {
+  .rf-countdown {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--magenta);
+    min-width: 32px;
+    text-align: center;
+    animation: pulse 1s ease-in-out infinite;
+  }
+
+  .rf-countdown.urgent {
+    color: var(--magenta);
+    text-shadow: 0 0 12px rgba(255,0,60,0.6);
+    font-size: 1.6rem;
+  }
+
+  .rf-restart-btn {
     font-family: 'Share Tech Mono', monospace;
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    padding: 0.5rem 1.2rem;
-    border: 1px solid var(--border-dim);
-    border-radius: 20px;
-    cursor: pointer;
+    font-size: 1rem;
     background: transparent;
+    border: 1px solid var(--border-dim);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     color: var(--text-faint);
     transition: all 0.2s;
+    flex-shrink: 0;
   }
 
-  .rf-timer-btn:hover { border-color: var(--magenta); color: var(--magenta); }
-  .rf-timer-btn.active { border-color: var(--magenta); color: var(--magenta); background: rgba(255,0,60,0.08); }
+  .rf-restart-btn:hover { border-color: var(--magenta); color: var(--magenta); }
 
   .rf-stats-row {
     display: flex;
@@ -1566,14 +1592,6 @@
   .rf-start-btn:hover { background: rgba(255,0,60,0.18); box-shadow: 0 0 30px rgba(255,0,60,0.3); transform: translateY(-1px); }
   .rf-start-btn:active { transform: scale(0.98); }
 
-  /* GAME SCREEN */
-  .rf-game-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.7rem;
-  }
-
   .rf-q-counter {
     font-family: 'Share Tech Mono', monospace;
     font-size: 0.72rem;
@@ -1584,25 +1602,6 @@
   .rf-score-live { display: flex; align-items: center; gap: 0.5rem; }
   .rf-score-num { font-family: 'Orbitron', monospace; font-size: 1.1rem; color: var(--magenta); }
   .rf-score-streak { font-family: 'Share Tech Mono', monospace; font-size: 0.65rem; color: var(--amber); letter-spacing: 0.08em; }
-
-  .rf-timer-bar-wrap {
-    background: rgba(255,255,255,0.07);
-    height: 4px;
-    border-radius: 4px;
-    margin-bottom: 1.5rem;
-    overflow: hidden;
-  }
-
-  .rf-timer-bar {
-    height: 4px;
-    border-radius: 4px;
-    background: var(--magenta);
-    box-shadow: 0 0 8px rgba(255,0,60,0.6);
-    width: 100%;
-    transition: width linear;
-  }
-
-  .rf-timer-bar.urgent { background: var(--amber); box-shadow: 0 0 8px rgba(255,230,0,0.6); }
 
   .rf-category-tag {
     font-family: 'Share Tech Mono', monospace;
@@ -1980,79 +1979,12 @@
 ══════════════════════════════════════════════ -->
 <div id="decision-engine">
 
-<!-- ══ RAPID FIRE ══ -->
-<div id="rapid-fire-section">
-
-  <div class="rf-header-wrap">
-    <div class="de-eyebrow">// Decision Engine · Category 13</div>
-    <h2 class="rf-title">Rapid Fire</h2>
-    <p class="rf-intro">Train your instincts. Real-life situations. Fast choices. No overthinking — that's the point.</p>
-  </div>
-
-  <!-- RF HOME -->
-  <div class="rf-screen active" id="rf-home">
-    <div class="rf-timer-pick">
-      <div class="rf-timer-label">// Choose your timer per question</div>
-      <div class="rf-timer-btns">
-        <button class="rf-timer-btn active" onclick="rfSetTimer(3,this)">3 sec</button>
-        <button class="rf-timer-btn" onclick="rfSetTimer(5,this)">5 sec</button>
-        <button class="rf-timer-btn" onclick="rfSetTimer(7,this)">7 sec</button>
-      </div>
-    </div>
-    <div class="rf-stats-row" id="rf-stats-row" style="display:none">
-      <div class="rf-stat"><div class="rf-stat-num" id="rf-best-score">—</div><div class="rf-stat-label">Best Score</div></div>
-      <div class="rf-stat"><div class="rf-stat-num" id="rf-best-streak">—</div><div class="rf-stat-label">Best Streak</div></div>
-      <div class="rf-stat"><div class="rf-stat-num" id="rf-games-played">—</div><div class="rf-stat-label">Rounds Played</div></div>
-    </div>
-    <button class="rf-start-btn" onclick="rfStart()">Start Round ↗</button>
-  </div>
-
-  <!-- RF GAME -->
-  <div class="rf-screen" id="rf-game">
-    <div class="rf-game-header">
-      <div class="rf-q-counter" id="rf-q-counter">1 / 9</div>
-      <div class="rf-score-live"><span class="rf-score-num" id="rf-score-live">0</span> <span class="rf-score-streak" id="rf-streak-live"></span></div>
-    </div>
-    <div class="rf-timer-bar-wrap"><div class="rf-timer-bar" id="rf-timer-bar"></div></div>
-    <div class="rf-category-tag" id="rf-category-tag"></div>
-    <div class="rf-question" id="rf-question"></div>
-    <div class="rf-choices" id="rf-choices"></div>
-    <div class="rf-result" id="rf-result" style="display:none"></div>
-  </div>
-
-  <!-- RF RESULTS -->
-  <div class="rf-screen" id="rf-results">
-    <div class="rf-result-header">
-      <div class="de-eyebrow">// Round Complete</div>
-      <div class="rf-final-score" id="rf-final-score">0 / 9</div>
-      <div class="rf-final-label">Questions Answered Correctly</div>
-      <div class="rf-final-streak" id="rf-final-streak"></div>
-    </div>
-    <div class="rf-result-message" id="rf-result-message"></div>
-    <div class="rf-missed-wrap" id="rf-missed-wrap" style="display:none">
-      <div class="rf-missed-label">// Questions You Missed</div>
-      <div id="rf-missed-list"></div>
-    </div>
-    <div class="rf-result-btns">
-      <button class="rf-start-btn" onclick="rfStart()">Play Again ↗</button>
-      <button class="btn btn-dim" onclick="rfGoHome()">← Change Timer</button>
-    </div>
-  </div>
-
-  <div class="rf-bridge">
-    <div class="rf-bridge-line"></div>
-    <div class="rf-bridge-text">Want to explore a decision in depth? Try one of the 12 categories below.</div>
-    <div class="rf-bridge-line"></div>
-  </div>
-
-</div><!-- end rapid-fire-section -->
-
-  <!-- HOME -->
+  <!-- ══ DECISION ENGINE HOME ══ -->
   <div class="de-screen active" id="de-home">
     <div class="de-header-wrap">
       <div class="de-eyebrow">// Decision Engine</div>
       <h2 class="de-title">Practice Making Decisions</h2>
-      <p class="de-intro">Real decisions are hard. This is a safe space to practice them — across every domain of life. Choose a category, work through scenarios, and discover how you naturally decide. No grades. Just insight.</p>
+      <p class="de-intro">Most people make decisions by habit, pressure, or instinct — without ever stopping to examine how they actually decide. The Decision Engine gives you a deliberate space to practice. Each category covers a domain of life where decisions compound over time. You'll work through real scenarios, face genuine trade-offs, and get a personalized read on what your choices reveal about how you think. No right or wrong. Just clarity.</p>
     </div>
 
     <div class="de-profile-bar" id="de-profile-bar" style="display:none">
@@ -2063,7 +1995,7 @@
     <div class="de-categories" id="de-categories"></div>
   </div>
 
-  <!-- SESSION -->
+  <!-- ══ SESSION ══ -->
   <div class="de-screen" id="de-session">
     <div class="de-session-header">
       <div>
@@ -2110,7 +2042,7 @@
     </div>
   </div>
 
-  <!-- DEBRIEF -->
+  <!-- ══ DEBRIEF ══ -->
   <div class="de-screen" id="de-debrief">
     <div class="de-session-header">
       <div>
@@ -2121,7 +2053,7 @@
     </div>
 
     <div class="de-debrief-score">
-      <div class="de-debrief-num" id="de-debrief-num">5</div>
+      <div class="de-debrief-num" id="de-debrief-num">3</div>
       <div class="de-debrief-sublabel">Decisions Practiced</div>
     </div>
 
@@ -2152,6 +2084,62 @@
       <button class="btn btn-amber" onclick="deGoHome()">New Category ↗</button>
     </div>
   </div>
+
+  <!-- ══ RAPID FIRE ══ -->
+  <div id="rapid-fire-section">
+
+    <div class="rf-header-wrap">
+      <div class="de-eyebrow">// Decision Engine · Category 13</div>
+      <h2 class="rf-title">Rapid Fire</h2>
+      <p class="rf-intro">Once you know how you decide, train how fast you decide. Rapid Fire pulls real-life situations from every category and puts you on a clock. The goal isn't perfection — it's building the muscle of decisive thinking. The more you practice, the less you freeze. Ten questions, one round, go again.</p>
+    </div>
+
+    <!-- RF HOME -->
+    <div class="rf-screen active" id="rf-home">
+      <div class="rf-stats-row" id="rf-stats-row" style="display:none">
+        <div class="rf-stat"><div class="rf-stat-num" id="rf-best-score">—</div><div class="rf-stat-label">Best Score</div></div>
+        <div class="rf-stat"><div class="rf-stat-num" id="rf-best-streak">—</div><div class="rf-stat-label">Best Streak</div></div>
+        <div class="rf-stat"><div class="rf-stat-num" id="rf-games-played">—</div><div class="rf-stat-label">Rounds Played</div></div>
+      </div>
+      <button class="rf-start-btn" onclick="rfStart()">Start Round ↗</button>
+    </div>
+
+    <!-- RF GAME -->
+    <div class="rf-screen" id="rf-game">
+      <div class="rf-game-header">
+        <div class="rf-q-counter" id="rf-q-counter">1 / 10</div>
+        <div class="rf-game-right">
+          <div class="rf-countdown" id="rf-countdown" style="display:none"></div>
+          <div class="rf-score-live"><span class="rf-score-num" id="rf-score-live">0</span> <span class="rf-score-streak" id="rf-streak-live"></span></div>
+          <button class="rf-restart-btn" onclick="rfStart()" title="Restart">↺</button>
+        </div>
+      </div>
+      <div class="rf-category-tag" id="rf-category-tag"></div>
+      <div class="rf-question" id="rf-question"></div>
+      <div class="rf-choices" id="rf-choices"></div>
+      <div class="rf-result" id="rf-result" style="display:none"></div>
+    </div>
+
+    <!-- RF RESULTS -->
+    <div class="rf-screen" id="rf-results">
+      <div class="rf-result-header">
+        <div class="de-eyebrow">// Round Complete</div>
+        <div class="rf-final-score" id="rf-final-score">0 / 10</div>
+        <div class="rf-final-label">Questions Answered Correctly</div>
+        <div class="rf-final-streak" id="rf-final-streak"></div>
+      </div>
+      <div class="rf-result-message" id="rf-result-message"></div>
+      <div class="rf-missed-wrap" id="rf-missed-wrap" style="display:none">
+        <div class="rf-missed-label">// Questions You Missed</div>
+        <div id="rf-missed-list"></div>
+      </div>
+      <div class="rf-result-btns">
+        <button class="rf-start-btn" onclick="rfStart()">Play Again ↗</button>
+        <button class="btn btn-dim" onclick="rfGoHome()">← Back</button>
+      </div>
+    </div>
+
+  </div><!-- end rapid-fire-section -->
 
 </div><!-- end decision-engine -->
 
@@ -2773,7 +2761,7 @@ const RF_QUESTIONS = [
   {cat:'Define Meaning',q:'The most important question you can ask about how you spend your time:',choices:['Am I being productive?','Am I doing what I said matters to me?','Am I ahead of others?','Am I satisfied?'],correct:1},
 ];
 
-let rfTimer = 5;
+let rfTimer = 20;
 let rfTimerInterval = null;
 let rfTimeLeft = 0;
 let rfCurrentQ = 0;
@@ -2784,11 +2772,7 @@ let rfBestStreak = 0;
 let rfMissed = [];
 const RF_ROUND_SIZE = 10;
 
-function rfSetTimer(t, btn) {
-  rfTimer = t;
-  document.querySelectorAll('.rf-timer-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-}
+function rfSetTimer(t, btn) { rfTimer = t; }
 
 function rfGoHome() {
   clearInterval(rfTimerInterval);
@@ -2830,6 +2814,10 @@ function rfLoadQuestion() {
   document.getElementById('rf-question').textContent = q.q;
   document.getElementById('rf-result').style.display = 'none';
 
+  const countdown = document.getElementById('rf-countdown');
+  countdown.style.display = 'none';
+  countdown.className = 'rf-countdown';
+
   const choicesEl = document.getElementById('rf-choices');
   choicesEl.innerHTML = '';
   const letters = ['A','B','C','D'];
@@ -2841,27 +2829,21 @@ function rfLoadQuestion() {
     choicesEl.appendChild(btn);
   });
 
-  const bar = document.getElementById('rf-timer-bar');
-  bar.style.transition = 'none';
-  bar.style.width = '100%';
-  bar.className = 'rf-timer-bar';
   rfTimeLeft = rfTimer;
-
-  setTimeout(() => {
-    bar.style.transition = `width ${rfTimer}s linear`;
-    bar.style.width = '0%';
-  }, 50);
-
-  let elapsed = 0;
   rfTimerInterval = setInterval(() => {
-    elapsed += 0.1;
-    if (elapsed >= rfTimer * 0.6) bar.classList.add('urgent');
-    if (elapsed >= rfTimer) { clearInterval(rfTimerInterval); rfTimeout(); }
-  }, 100);
+    rfTimeLeft -= 1;
+    if (rfTimeLeft <= 10) {
+      countdown.style.display = 'block';
+      countdown.textContent = rfTimeLeft;
+      countdown.className = rfTimeLeft <= 5 ? 'rf-countdown urgent' : 'rf-countdown';
+    }
+    if (rfTimeLeft <= 0) { clearInterval(rfTimerInterval); rfTimeout(); }
+  }, 1000);
 }
 
 function rfAnswer(chosen) {
   clearInterval(rfTimerInterval);
+  document.getElementById('rf-countdown').style.display = 'none';
   const q = rfRoundQuestions[rfCurrentQ];
   const isCorrect = chosen === q.correct;
   const letters = ['A','B','C','D'];
@@ -2894,6 +2876,7 @@ function rfAnswer(chosen) {
 }
 
 function rfTimeout() {
+  document.getElementById('rf-countdown').style.display = 'none';
   const q = rfRoundQuestions[rfCurrentQ];
   const letters = ['A','B','C','D'];
   rfMissed.push({ q: q.q, answer: q.choices[q.correct] });
